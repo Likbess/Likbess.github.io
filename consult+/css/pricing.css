@@ -1,0 +1,131 @@
+@charset "UTF-8";
+h1 {
+  padding-bottom: 100px; }
+
+.plans {
+  padding-bottom: 60px; }
+  .plans h2 {
+    padding-bottom: 30px;
+    text-align: left;
+    padding-top: 94px;
+    padding-left: 15px; }
+  .plans .plan .plan_format {
+    color: #fff;
+    text-transform: uppercase;
+    width: 340px;
+    height: 120px;
+    display: block;
+    margin-left: 20px; }
+    .plans .plan .plan_format h4 {
+      padding-left: 40px;
+      font-size: 13px;
+      padding-top: 20px; }
+      .plans .plan .plan_format h4 .money {
+        font-size: 36px; }
+    .plans .plan .plan_format h6 {
+      font-family: 'MontserratBold';
+      padding-left: 40px;
+      font-size: 18px;
+      margin-top: -20px; }
+  .plans .plan .basik {
+    margin-left: 0;
+    background-color: #ffac55; }
+    .plans .plan .basik h6 {
+      color: #fae0c5; }
+  .plans .plan .silver {
+    background-color: #03b6e7; }
+    .plans .plan .silver h6 {
+      color: #aee9f9; }
+  .plans .plan .gold {
+    background-color: #55bd77;
+    margin-left: 40px; }
+    .plans .plan .gold h6 {
+      color: #c9ffdb; }
+  .plans .plan ul li {
+    list-style: none;
+    line-height: 36px;
+    color: #838b8c;
+    font-size: 15px; }
+    .plans .plan ul li i {
+      color: #ffac55;
+      padding-right: 15px; }
+  .plans .plan .silver_list {
+    margin-left: 20px; }
+  .plans .plan .gold_list {
+    margin-left: 40px; }
+  .plans .plan .basik_button {
+    margin-top: 80px;
+    margin-left: 40px; }
+  .plans .plan .silver_button {
+    margin-left: 60px; }
+  .plans .plan .gold_button {
+    margin-left: 80px; }
+
+.faq {
+  padding-top: 90px;
+  background-color: #e7eff1;
+  padding-bottom: 60px;
+  /* скрываем чекбоксы и блоки с содержанием */
+  /* вид текста label */
+  /* вид текста label при активном переключателе */
+  /* когда чекбокс активен показываем блоки с содержанием  */
+  /* анимация при появлении скрытых блоков */ }
+  .faq h2 {
+    padding-bottom: 30px;
+    text-align: left; }
+  .faq .hide,
+  .faq .hide + label ~ div {
+    display: none; }
+  .faq .hide + label {
+    margin: 0;
+    margin-left: -20px;
+    padding: 0;
+    color: #343a3b;
+    cursor: pointer;
+    padding-bottom: 40px;
+    font-family: 'MontserratBold';
+    display: inline-block;
+    font-weight: bold;
+    text-transform: uppercase; }
+  .faq .hide:checked + label + div {
+    display: block;
+    background-color: #e7eff1;
+    margin-left: 20px;
+    padding: 10px;
+    padding-right: 300px;
+    margin-left: -5px;
+    color: #838b8c;
+    /* чуточку анимации при появлении */
+    -webkit-animation: fade ease-in 0.5s;
+    animation: fade ease-in 0.5s; }
+
+@-webkit-keyframes fade {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+@keyframes fade {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+  .faq .hide + label:before {
+    color: #343a3b;
+    content: "\002B";
+    display: block;
+    float: left;
+    font-size: 30px;
+    font-weight: bold;
+    height: 16px;
+    line-height: 16px;
+    margin: 3px 5px;
+    margin-left: 00px;
+    text-align: center;
+    width: 16px;
+    position: relative;
+    left: 1150px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%; }
+  .faq .hide:checked + label:before {
+    content: "\2212"; }

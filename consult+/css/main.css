@@ -1,0 +1,455 @@
+*::-webkit-input-placeholder {
+  color: #666;
+  opacity: 1;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: #5e5e5e; }
+
+*:-moz-placeholder {
+  color: #666;
+  opacity: 1; }
+
+*::-moz-placeholder {
+  color: #666;
+  opacity: 1; }
+
+*:-ms-input-placeholder {
+  color: #666;
+  opacity: 1; }
+
+*:hover {
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease; }
+
+p {
+  font-family: 'DomineRegular';
+  color: #838b8c; }
+
+h2 {
+  color: #343a3b;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 32px;
+  line-height: 33px; }
+
+h1, h2, h3, h4 {
+  font-family: 'MontserratBold';
+  text-transform: uppercase; }
+
+body {
+  font-size: 16px;
+  overflow-x: hidden; }
+  body a {
+    text-decoration: none; }
+
+.owl-dots {
+  margin-top: 65px;
+  margin-bottom: 55px;
+  text-align: center; }
+  .owl-dots .owl-dot {
+    width: 12px;
+    margin-left: 10px;
+    height: 12px;
+    -webkit-border-radius: 50px;
+            border-radius: 50px;
+    border: 2px solid #fff;
+    display: inline-block; }
+  .owl-dots .active {
+    border: 2px solid #1bc82b;
+    background-color: #1bc82b; }
+
+.button {
+  display: block;
+  line-height: 46px;
+  background-color: #16d428;
+  text-transform: uppercase;
+  color: #fff;
+  font-family: 'MontserratRegular';
+  width: 140px;
+  height: 46px;
+  -webkit-border-radius: 20px;
+          border-radius: 20px;
+  text-align: center;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  margin-top: 40px;
+  border: 2px solid transparent; }
+  .button:hover {
+    background-color: #fff;
+    border: 2px solid #16d428 !important;
+    color: #16d421;
+    padding-top: -5px; }
+
+#Home .navbar {
+  margin-top: 30px;
+  text-transform: uppercase; }
+  #Home .navbar li {
+    display: inline-block;
+    color: #fff;
+    font-size: 15px; }
+    #Home .navbar li a {
+      color: #fff;
+      padding: 15px 15px; }
+      #Home .navbar li a:hover {
+        color: #ffac55; }
+    #Home .navbar li .active {
+      color: #ffac55; }
+  #Home .navbar .logo {
+    margin-left: -55px;
+    padding-right: 10px; }
+  #Home .navbar .phone {
+    padding-left: 50px; }
+    #Home .navbar .phone i {
+      padding-right: 5px;
+      font-size: 20px;
+      position: relative;
+      top: 2px;
+      color: #03b6e7; }
+    #Home .navbar .phone img {
+      padding-left: 10px; }
+    #Home .navbar .phone .telephone, #Home .navbar .phone .icon {
+      padding: 0; }
+
+#Home .container .title {
+  text-align: center;
+  color: #fff;
+  padding-top: 160px;
+  text-transform: uppercase; }
+  #Home .container .title h3 {
+    font-size: 16px;
+    font-family: 'MontserratRegular'; }
+  #Home .container .title h1 {
+    margin-top: -15px;
+    font-size: 48px;
+    font-family: 'MontserratBold'; }
+
+#Home .container .owl-carousel-first {
+  padding-top: 20px; }
+  #Home .container .owl-carousel-first .item {
+    text-align: center;
+    color: #fff;
+    background-color: #03b6e7;
+    height: 290px;
+    text-transform: uppercase; }
+    #Home .container .owl-carousel-first .item:hover {
+      background-color: #f6961b; }
+    #Home .container .owl-carousel-first .item .content {
+      padding-top: 86px; }
+    #Home .container .owl-carousel-first .item img {
+      margin: 0 auto;
+      width: 70px;
+      height: 70px; }
+    #Home .container .owl-carousel-first .item .technol {
+      width: 100px; }
+
+#AboutUs .title {
+  padding-bottom: 40px;
+  text-align: center;
+  z-index: 2;
+  padding-top: 90px; }
+  #AboutUs .title p {
+    line-height: 24px; }
+
+#AboutUs .owl-carousel-second {
+  padding-top: 380px;
+  z-index: 1;
+  padding-left: 115px;
+  position: relative;
+  top: 50px;
+  height: 10px !important;
+  padding-bottom: 190px; }
+  #AboutUs .owl-carousel-second div {
+    display: inline-block; }
+    #AboutUs .owl-carousel-second div .top {
+      margin-top: 0px; }
+    #AboutUs .owl-carousel-second div .top2 {
+      margin-top: 0px; }
+    #AboutUs .owl-carousel-second div .aaa {
+      margin-top: -5px; }
+    #AboutUs .owl-carousel-second div .bottom {
+      margin-bottom: 5px; }
+  #AboutUs .owl-carousel-second .owl-nav .owl-prev, #AboutUs .owl-carousel-second .owl-nav .owl-next {
+    position: relative;
+    bottom: 165px; }
+  #AboutUs .owl-carousel-second .owl-nav .owl-prev {
+    right: 65px; }
+  #AboutUs .owl-carousel-second .owl-nav .owl-next {
+    left: 1215px; }
+
+.Features {
+  padding-top: 50px;
+  background-color: #e7eff1; }
+  .Features p {
+    line-height: 28px; }
+  .Features h4 {
+    font-size: 17px; }
+  .Features .left .block img {
+    float: right; }
+  .Features .left .block p, .Features .left .block h4 {
+    text-align: right;
+    padding-right: 80px; }
+  .Features .center {
+    margin-top: 50px; }
+  .Features .right img {
+    float: left; }
+  .Features .right p, .Features .right h4 {
+    -moz-text-align-last: auto;
+         text-align-last: auto;
+    padding-left: 80px; }
+  .Features .bottom {
+    margin-top: 100px;
+    height: 80px;
+    background-color: #565d5d; }
+    .Features .bottom p {
+      -moz-text-align-last: auto;
+           text-align-last: auto;
+      padding-top: 30px;
+      padding-left: 30px;
+      font-size: 20px;
+      color: #fff; }
+    .Features .bottom .button {
+      width: 250px;
+      float: right;
+      margin-top: -56px;
+      margin-right: 30px; }
+
+#Projects {
+  margin-top: 640px;
+  width: 100%; }
+  #Projects h1 {
+    margin-bottom: 30px;
+    text-align: center; }
+  #Projects .button {
+    text-align: center;
+    width: 170px;
+    margin-top: 100px; }
+  #Projects .owl-carousel-third {
+    height: 400px; }
+    #Projects .owl-carousel-third .project {
+      margin-top: -170px; }
+      #Projects .owl-carousel-third .project .button2 {
+        margin-top: 120px;
+        display: block;
+        position: relative;
+        top: 60px;
+        left: 20px;
+        text-align: center;
+        -webkit-border-radius: 20px;
+                border-radius: 20px;
+        padding: 10px 20px;
+        border: 1px solid #f6961b;
+        width: 125px;
+        height: 37px;
+        font-size: 12px;
+        font-family: 'MontserratRegular';
+        text-transform: uppercase;
+        color: #fff; }
+        #Projects .owl-carousel-third .project .button2:hover {
+          background-color: #f6961b; }
+      #Projects .owl-carousel-third .project .content:hover, #Projects .owl-carousel-third .project .image:hover ~ .content {
+        background-color: #f6961b;
+        border: 1px solid #f6961b;
+        -webkit-transition: all 0.4s ease;
+        -o-transition: all 0.4s ease;
+        transition: all 0.4s ease; }
+        #Projects .owl-carousel-third .project .content:hover h4, #Projects .owl-carousel-third .project .content:hover p, #Projects .owl-carousel-third .project .image:hover ~ .content h4, #Projects .owl-carousel-third .project .image:hover ~ .content p {
+          color: #fff; }
+      #Projects .owl-carousel-third .project .content {
+        border: 1px solid #dae5e8;
+        height: 170px; }
+        #Projects .owl-carousel-third .project .content h4, #Projects .owl-carousel-third .project .content p {
+          padding-left: 30px; }
+    #Projects .owl-carousel-third .owl-dots {
+      position: relative;
+      width: 70px;
+      top: -270px;
+      right: 180px;
+      float: right; }
+
+#Services {
+  padding-top: 60px;
+  margin-top: 80px;
+  padding-bottom: 80px;
+  background-color: #fffaf3; }
+  #Services .block {
+    padding-top: 40px; }
+  #Services .button {
+    margin-top: 300px;
+    width: 170px; }
+
+#Testimonials {
+  padding-top: 40px;
+  background-color: #03b6e7;
+  text-align: center;
+  color: #fff;
+  height: 540px; }
+  #Testimonials h2 {
+    padding-top: 40px;
+    padding-right: 170px;
+    color: #fff; }
+  #Testimonials p {
+    padding-right: 80px; }
+  #Testimonials .owl-carousel-fourth {
+    padding-top: 80px; }
+    #Testimonials .owl-carousel-fourth .owl-dots {
+      position: relative;
+      bottom: 360px; }
+      #Testimonials .owl-carousel-fourth .owl-dots .owl-dot {
+        background-image: url("../img/face_2.png");
+        border: none;
+        width: 50px;
+        height: 50px;
+        opacity: .5;
+        z-index: 3;
+        background-color: #03b6e7; }
+      #Testimonials .owl-carousel-fourth .owl-dots .active {
+        opacity: 1;
+        height: 55px;
+        width: 55px; }
+  #Testimonials .fa-quote-right {
+    float: left;
+    font-size: 200px;
+    color: #0080a3;
+    margin-top: -52px; }
+  #Testimonials h4 {
+    font-size: 14px; }
+  #Testimonials h5 {
+    margin-top: -15px;
+    font-size: 15px;
+    font-family: 'DomineRegular'; }
+  #Testimonials p, #Testimonials h5 {
+    color: #ddf8ff; }
+  #Testimonials img {
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 20px; }
+  #Testimonials .fa-quote-left {
+    float: right;
+    position: relative;
+    bottom: 270px;
+    font-size: 30px; }
+
+#Blog {
+  background-color: #e7eff1; }
+  #Blog p {
+    line-height: 28px; }
+  #Blog h5 {
+    color: #343a3b;
+    padding-top: 20px;
+    font-size: 15px; }
+  #Blog h4, #Blog p {
+    margin-top: -10px; }
+  #Blog h2 {
+    margin-top: -70px;
+    margin-bottom: 50px; }
+  #Blog .blog_1 {
+    background-color: #fff;
+    padding-right: 30px;
+    border-top: 4px solid #1bc82b;
+    -webkit-box-shadow: 20px 0px 19px -3px rgba(50, 50, 50, 0.2);
+            box-shadow: 20px 0px 19px -3px rgba(50, 50, 50, 0.2);
+    z-index: 2; }
+    #Blog .blog_1 img {
+      float: left;
+      margin-left: -15px;
+      padding-right: 30px; }
+  #Blog .blog_2 {
+    background-color: #fff;
+    padding-right: 60px;
+    height: 300px;
+    padding-left: 60px;
+    border-top: 4px solid #ffac56; }
+  #Blog .button {
+    margin: 0 auto;
+    margin-top: 420px;
+    width: 160px;
+    margin-bottom: 100px; }
+
+#ContactUs {
+  margin-bottom: 90px; }
+  #ContactUs h2 {
+    margin-top: 90px;
+    margin-bottom: 30px; }
+  #ContactUs .contact {
+    border: 1px solid #e1eaec;
+    margin-left: 30px;
+    width: 360px; }
+    #ContactUs .contact img {
+      float: left;
+      padding-top: 35px;
+      margin-left: 20px; }
+    #ContactUs .contact h4 {
+      padding-top: 5px; }
+    #ContactUs .contact h4, #ContactUs .contact p {
+      padding-left: 120px;
+      font-size: 18px;
+      color: #343a3b; }
+    #ContactUs .contact p {
+      margin-top: -20px; }
+
+footer {
+  background-color: #262829; }
+  footer h4 {
+    padding-top: 90px;
+    color: #e1e1e1;
+    font-size: 20px; }
+    footer h4 a {
+      color: #e1e1e1; }
+  footer ul li {
+    margin-left: -40px;
+    line-height: 30px;
+    text-align: left;
+    list-style: none;
+    text-transform: uppercase;
+    font-size: 13px; }
+    footer ul li a {
+      color: #838b8c;
+      font-family: 'MontserratRegular'; }
+  footer .logo {
+    padding-top: 230px; }
+  footer form input {
+    border: none;
+    height: 45px;
+    background-color: #323334;
+    -webkit-border-radius: 25px;
+            border-radius: 25px;
+    padding-left: 30px;
+    margin-top: 30px;
+    width: 300px;
+    color: #fff; }
+  footer form .button {
+    position: relative;
+    bottom: 85px;
+    left: 100px;
+    height: 45px;
+    border: none;
+    -webkit-border-radius: 25px;
+            border-radius: 25px; }
+  footer .bottom hr {
+    height: 1px;
+    background: #323334;
+    border: none; }
+  footer .bottom p {
+    float: left; }
+  footer .bottom ul {
+    float: right; }
+    footer .bottom ul li {
+      display: inline-block;
+      padding-right: 70px;
+      font-family: 'MontserratRegular';
+      font-size: 13px; }
+      footer .bottom ul li a .fb {
+        color: #385da5; }
+      footer .bottom ul li a .tw {
+        color: #00b5da; }
+      footer .bottom ul li a .inst {
+        color: #d4c5a8; }
+      footer .bottom ul li a .link {
+        color: #1883bb; }
+      footer .bottom ul li a .google {
+        color: #e4463b; }
+    footer .bottom ul li:last-child {
+      padding-right: 0; }

@@ -1,0 +1,32 @@
+h1 {
+  padding-bottom: 100px; }
+
+.services {
+  padding-bottom: 60px; }
+  .services h2 {
+    text-align: left;
+    padding-top: 60px;
+    padding-left: 30px; }
+  .services .service {
+    border: 1px solid #e4ecee;
+    width: 525px;
+    margin-bottom: 40px;
+    margin-left: 30px; }
+    .services .service h4 {
+      font-size: 18px;
+      padding-left: 50px; }
+    .services .service .button {
+      margin-left: 50px;
+      margin-bottom: 70px; }
+    .services .service img {
+      margin-left: -15px;
+      width: 525px; }
+    .services .service ul li {
+      list-style: none;
+      padding-left: 10px;
+      line-height: 36px;
+      font-size: 15px;
+      color: #838b8c; }
+      .services .service ul li i {
+        color: #ffae59;
+        padding-right: 15px; }

@@ -1,0 +1,274 @@
+/*==========  Desktop First Method  ==========*/
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+  header .owl-carousel-first .slide {
+    padding-top: 50px;
+    padding-bottom: 100px; }
+    header .owl-carousel-first .slide p {
+      font-size: 25px;
+      padding-top: 30px; }
+    header .owl-carousel-first .slide h1 {
+      font-size: 70px; }
+  header .owl-carousel-first .owl-dots {
+    padding-top: 40px; }
+  header .owl-carousel-first .owl-nav .owl-prev {
+    top: 270px; }
+  header .owl-carousel-first .owl-nav .owl-next {
+    top: 270px; }
+  .about_us--text-slideDown .slideDown.last div {
+    padding-bottom: 70px !important; }
+  .about_us--text-slideDown .client {
+    margin-top: -140px !important; }
+  .case {
+    height: 600px !important; }
+  .case_2 {
+    margin-bottom: 50px !important; }
+  .process_bar {
+    padding-top: 150px !important; }
+  #modal_form .worker_img {
+    width: 50%; }
+  #portfolio .examples .example {
+    width: 49%; } }
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  #portfolio .examples .example:hover .content {
+    line-height: 5; }
+    #portfolio .examples .example:hover .content h3 {
+      margin-top: 120px; }
+  .team .person:hover .about_person {
+    margin-left: 15px; } }
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+  .call-to-action p {
+    font-size: 16px; }
+  .case {
+    height: 450px !important; }
+  .mac {
+    padding-bottom: 40px; }
+  .client {
+    padding-top: 150px; }
+  .why_us .process {
+    padding-bottom: 50px; }
+    .why_us .process .process_bar {
+      padding-bottom: 30px; }
+  .worker_img {
+    height: 70%	!important;
+    margin-top: 80px; }
+  #modal_form .text {
+    text-align: center; }
+  .process_bar {
+    margin-left: 100px; }
+  .promote p {
+    text-align: center;
+    padding-bottom: 20px; }
+  .worker_skill img {
+    padding-top: 10px !important; }
+  .worker_soc_sites {
+    padding-top: 10px !important; } }
+
+/* Small Devices, Tablets */
+@media only screen and (max-width: 768px) {
+  #portfolio .examples .example .content h3 {
+    margin-top: 60px !important; }
+  .bag_2 {
+    margin-left: 8.333333%; }
+  .bag .logo {
+    padding-left: 25px !important; }
+  .bag .fa-times {
+    margin-right: 15px; }
+  .mac {
+    width: 100%;
+    padding-top: 50px; }
+  .why_us {
+    padding-bottom: 30px; }
+  .about_us--caseStudy {
+    padding-bottom: 40px; }
+  .case_2 {
+    margin-bottom: 0px !important; }
+  .case {
+    height: 400px !important; }
+  .menu .logo {
+    margin-left: 15px; }
+  .menu .fa-times {
+    padding-right: 20px !important; }
+  h1 {
+    font-size: 50px !important; }
+  .owl-carousel-first .button {
+    margin-left: 0 !important;
+    margin-top: 20px; }
+  .process_bar {
+    margin-left: 0 !important; }
+  .promote {
+    text-align: center; }
+  header .owl-nav .owl-prev {
+    top: 250px !important; }
+  header .owl-nav .owl-next {
+    top: 250px !important; }
+  .call-to-action p {
+    text-align: center; }
+  .why_us h2 {
+    text-align: center; }
+    .why_us h2 .title_red:after {
+      margin: 0 auto;
+      margin-top: 20px; }
+  .customer_said {
+    padding-top: 20px; }
+    .customer_said p {
+      font-size: 14.5px !important;
+      margin-top: 10px; }
+  #modal_send {
+    margin-top: -35%; }
+    #modal_send input, #modal_send textarea {
+      padding: 20px 15px; }
+  .menu .logo {
+    margin-left: 0; }
+  .menu .fa-times {
+    padding-right: 5px !important; } }
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 35px !important; }
+  p {
+    font-size: 16px !important; }
+  h1 {
+    font-size: 45px !important; }
+  .case_1, .case_2 {
+    padding-top: 30px !important; }
+  header .owl-nav .owl-prev {
+    top: 440px !important; }
+  header .owl-nav .owl-next {
+    top: 440px !important; }
+  .call-to-action p {
+    font-size: 14px !important;
+    text-align: center; }
+  #modal_form {
+    height: auto; }
+    #modal_form p span.hidden-sm {
+      display: none; }
+  .team .person:hover .about_person .button {
+    margin-top: 42px; }
+  #portfolio .examples .example .content h3 {
+    margin-top: 40px !important;
+    font-size: 25px !important;
+    margin-bottom: 30px !important; }
+  #modal_send {
+    margin-top: -35%; }
+    #modal_send input, #modal_send textarea {
+      padding: 15px 10px; } }
+
+@media only screen and (max-width: 580px) {
+  .customer_said {
+    padding-top: 20px; }
+    .customer_said .owl-nav {
+      display: none !important; }
+    .customer_said p {
+      font-size: 14px !important;
+      line-height: 25px;
+      margin-top: 30px; }
+    .customer_said h2 {
+      padding-bottom: 0; }
+  .menu .fa-times {
+    padding-top: 12px !important; }
+  header .navbar .header-menu {
+    padding-bottom: 15px; }
+  header .navbar .logo {
+    padding-top: 25px; }
+  header .navbar .burger {
+    padding-top: 20px; }
+  .about_us h2 {
+    font-size: 30px !important; }
+  .process .content .line p {
+    margin-left: 30px; }
+  #portfolio {
+    padding-top: 30px; }
+    #portfolio .keyboard {
+      display: block;
+      margin-left: 50%; }
+  .hiring {
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px; }
+  .twitter {
+    padding-top: 50px;
+    padding-bottom: 50px; }
+  #map {
+    height: 400px; }
+  footer {
+    padding-top: 60px;
+    padding-bottom: 20px; }
+  .team {
+    text-align: center; }
+    .team .title_red:after {
+      margin: 0 auto;
+      margin-top: 25px; }
+  #modal_form p {
+    font-size: 14px !important; }
+  #modal_send {
+    margin-top: 0;
+    margin-top: -60%; } }
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 320px) {
+  .customer_said p {
+    font-size: 12px !important;
+    margin-top: 25px; }
+  .process .content .line h4 {
+    margin-left: 30px; }
+  #portfolio .examples .example {
+    width: 100%; }
+    #portfolio .examples .example .content h3 {
+      margin-top: 90px !important; } }
+
+@media only screen and (max-width: 390px) {
+  header .owl-nav .owl-prev {
+    top: 520px !important; }
+  header .owl-nav .owl-next {
+    top: 520px !important; }
+  .about_us h2 {
+    font-size: 26px !important; }
+  .about_us .title {
+    font-size: 40px !important; } }
+
+/*==========  Mobile First Method  ==========*/
+/* Custom, iPhone Retina */
+/* Extra Small Devices, Phones */
+/* Small Devices, Tablets */
+/* Medium Devices, Desktops */
+/* Large Devices, Wide Screens */
+@media only screen and (min-width: 1200px) {
+  #modal_form {
+    right: 10%;
+    height: 60%;
+    width: 80%; }
+    #modal_form .worker_img {
+      height: auto;
+      width: auto; } }
+
+@media only screen and (max-height: 940px) {
+  .menu .nav {
+    margin-top: 220px !important; } }
+
+@media only screen and (max-height: 840px) {
+  .menu .nav {
+    margin-top: 150px !important; } }
+
+@media only screen and (max-height: 760px) {
+  .menu .nav {
+    font-size: 30px !important;
+    margin-top: 100px !important; } }
+
+@media only screen and (max-height: 670px) {
+  .menu .nav {
+    font-size: 26px !important;
+    margin-top: 60px !important; } }
+
+@media only screen and (max-height: 600px) {
+  .menu .nav {
+    font-size: 24px !important;
+    padding-bottom: 20px !important; } }
+
+@media only screen and (max-height: 570px) {
+  .menu .nav li a {
+    padding: 18px 0 !important; } }

@@ -1,0 +1,30 @@
+/* MontserratBold	*/
+@font-face {
+    font-family: 'MontserratBold';
+    src: url('../fonts/MontserratBold/MontserratBold.eot');
+    src: url('../fonts/MontserratBold/MontserratBold.eot') format('embedded-opentype'),
+         url('../fonts/MontserratBold/MontserratBold.woff2') format('woff2'),
+         url('../fonts/MontserratBold/MontserratBold.woff') format('woff'),
+         url('../fonts/MontserratBold/MontserratBold.ttf') format('truetype'),
+         url('../fonts/MontserratBold/MontserratBold.svg#MontserratBold') format('svg');
+}
+/* MontserratRegular */
+@font-face {
+    font-family: 'MontserratRegular';
+    src: url('../fonts/MontserratRegular/MontserratRegular.eot');
+    src: url('../fonts/MontserratRegular/MontserratRegular.eot') format('embedded-opentype'),
+         url('../fonts/MontserratRegular/MontserratRegular.woff2') format('woff2'),
+         url('../fonts/MontserratRegular/MontserratRegular.woff') format('woff'),
+         url('../fonts/MontserratRegular/MontserratRegular.ttf') format('truetype'),
+         url('../fonts/MontserratRegular/MontserratRegular.svg#MontserratRegular') format('svg');
+}
+/* DomineRegular */
+@font-face {
+    font-family: 'DomineRegular';
+    src: url('../fonts/DomineRegular/DomineRegular.eot');
+    src: url('../fonts/DomineRegular/DomineRegular.eot') format('embedded-opentype'),
+         url('../fonts/DomineRegular/DomineRegular.woff2') format('woff2'),
+         url('../fonts/DomineRegular/DomineRegular.woff') format('woff'),
+         url('../fonts/DomineRegular/DomineRegular.ttf') format('truetype'),
+         url('../fonts/DomineRegular/DomineRegular.svg#DomineRegular') format('svg');
+}

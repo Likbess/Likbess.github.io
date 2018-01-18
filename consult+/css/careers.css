@@ -1,0 +1,62 @@
+.jobs {
+  padding-bottom: 60px;
+  padding-top: 60px; }
+  .jobs h2 {
+    text-align: left;
+    padding-left: 25px; }
+  .jobs .job:last-child {
+    border-top: 1px solid #e3ecee; }
+  .jobs .first_job {
+    border-bottom: 1px solid #e3ecee; }
+  .jobs .job {
+    padding-bottom: 20px; }
+    .jobs .job * {
+      display: inline-block; }
+    .jobs .job .button {
+      float: right; }
+    .jobs .job .last {
+      margin-left: 600px;
+      margin-top: -80px; }
+    .jobs .job .job_title, .jobs .job .location {
+      padding-top: 35px; }
+    .jobs .job .location i {
+      color: #16d428;
+      padding-right: 10px; }
+    .jobs .job .location p {
+      font-size: 15px; }
+    .jobs .job h5 {
+      text-transform: uppercase;
+      font-size: 14px; }
+    .jobs .job .job_title p {
+      display: block;
+      margin-top: -15px; }
+
+.application {
+  padding-bottom: 94px; }
+  .application *::-webkit-input-placeholder {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #343a3b;
+    font-family: 'MontserratRegular'; }
+  .application input, .application textarea {
+    border: none;
+    border-bottom: 1px solid #cddbde;
+    padding-top: 40px;
+    padding-left: 0;
+    padding-bottom: 5px; }
+  .application input {
+    width: 340px;
+    margin-left: 45px; }
+  .application input:nth-child(1), .application input:nth-child(4) {
+    margin-left: 0; }
+  .application .button {
+    width: 200px;
+    font-size: 14px;
+    height: 48px;
+    float: left;
+    margin-top: 45px;
+    -webkit-border-radius: 30px;
+            border-radius: 30px; }
+
+h1 {
+  padding-bottom: 100px; }

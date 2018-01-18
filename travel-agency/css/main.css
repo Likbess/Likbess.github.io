@@ -1,0 +1,331 @@
+*::-webkit-input-placeholder {
+  color: #585858;
+  opacity: 1; }
+
+*:-moz-placeholder {
+  color: #666;
+  opacity: 1; }
+
+*::-moz-placeholder {
+  color: #666;
+  opacity: 1; }
+
+*:-ms-input-placeholder {
+  color: #666;
+  opacity: 1; }
+
+body {
+  margin-top: -100px;
+  font-family: "RobotoRegular", sans-serif;
+  color: #fff;
+  overflow-x: hidden; }
+  body a {
+    text-decoration: none;
+    color: #fff; }
+    body a:hover {
+      -webkit-transition: all 0.3s ease;
+      -o-transition: all 0.3s ease;
+      transition: all 0.3s ease; }
+
+h1, h2 {
+  text-transform: uppercase;
+  font-family: 'LatoBlack'; }
+
+h3 {
+  font-size: 17px;
+  font-family: 'LatoHeavy';
+  text-transform: uppercase; }
+
+h2 {
+  font-size: 35px; }
+
+.button {
+  background-color: #00aeed;
+  padding: 10px 30px;
+  margin-bottom: -50px;
+  -webkit-border-radius: 25px;
+          border-radius: 25px;
+  font-size: 15px;
+  font-family: 'LatoRegular';
+  font-weight: bold;
+  border: 2px solid transparent; }
+  .button:hover {
+    background-color: #fff;
+    color: #00aeed;
+    border: 2px solid #00aeed;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease; }
+
+p {
+  font-size: 17px;
+  font-family: 'LatoRegular';
+  line-height: 30px; }
+
+li {
+  list-style: none; }
+
+header {
+  background-image: url(../img/world-map.png); }
+  header .menu_btn {
+    position: absolute;
+    top: 150px;
+    right: 50px;
+    z-index: 2; }
+    header .menu_btn i {
+      font-size: 30px; }
+    header .menu_btn:hover {
+      color: #474084; }
+  header nav {
+    z-index: 2;
+    padding-top: 120px; }
+    header nav .logo {
+      padding-top: 30px;
+      float: left; }
+    header nav .nav {
+      display: none;
+      text-align: center; }
+      header nav .nav li {
+        display: inline-block;
+        padding-right: 30px;
+        text-align: center; }
+        header nav .nav li a {
+          padding: 22px 15px 22px;
+          display: block;
+          font-size: 15px;
+          text-transform: uppercase;
+          font-family: 'LatoBold';
+          font-weight: bold;
+          border-top: 8px solid transparent; }
+          header nav .nav li a:hover {
+            border-top: 8px solid #47408d; }
+  header h1 {
+    z-index: 2;
+    font-size: 72px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 80px;
+    font-family: 'LatoBold'; }
+  header .phone {
+    margin-top: 20px;
+    z-index: 2; }
+  header .header_text {
+    z-index: 2;
+    margin-top: 60px; }
+    header .header_text p {
+      padding-bottom: 36px; }
+
+.about_us {
+  padding-bottom: 65px;
+  padding-top: 20px; }
+  .about_us .block_text h2 {
+    color: #000;
+    font-size: 35px; }
+  .about_us .block_text p {
+    color: #707070;
+    padding-bottom: 36px; }
+  .about_us img {
+    text-align: center; }
+
+.owl-carousel {
+  height: auto;
+  background-image: url(../img/backgr-testimonials.jpg); }
+  .owl-carousel img {
+    float: left;
+    height: 400px;
+    width: auto !important;
+    display: block;
+    margin-top: 65px; }
+  .owl-carousel .comment {
+    text-align: center; }
+    .owl-carousel .comment i {
+      font-size: 102px;
+      color: #00aeed;
+      position: relative; }
+    .owl-carousel .comment .fa-quote-left {
+      right: 420px;
+      top: 30px; }
+    .owl-carousel .comment .fa-quote-right {
+      left: 340px; }
+    .owl-carousel .comment h4 {
+      margin-top: -50px;
+      font-size: 30px;
+      font-family: 'LatoRegular'; }
+    .owl-carousel .comment h5 {
+      font-size: 15px;
+      margin-top: -30px;
+      font-family: 'LatoRegular'; }
+  .owl-carousel .owl-dots {
+    display: block;
+    text-align: center;
+    position: relative; }
+    .owl-carousel .owl-dots .owl-dot {
+      width: 12px;
+      margin-left: 10px;
+      height: 12px;
+      background-color: #fff;
+      -webkit-border-radius: 50px;
+              border-radius: 50px;
+      display: inline-block; }
+    .owl-carousel .owl-dots .active {
+      background-color: #00aeed; }
+
+.services {
+  padding-bottom: 80px;
+  padding-top: 80px;
+  background-image: url(../img/backgr-serices.jpg);
+  text-align: center; }
+  .services h2 {
+    font-size: 36px; }
+  .services .service {
+    margin-top: 45px;
+    text-align: center; }
+    .services .service i {
+      font-size: 50px;
+      -webkit-border-radius: 50%;
+              border-radius: 50%;
+      border: 2px solid #fff;
+      padding: 15px 20px;
+      margin-bottom: 20px; }
+    .services .service p {
+      margin-top: -10px;
+      font-size: 16px;
+      line-height: 24px; }
+    .services .service .fa-line-chart {
+      margin-top: -10px;
+      padding: 20px 20px;
+      margin-bottom: 20px; }
+
+.make {
+  color: #000;
+  padding-bottom: 100px; }
+  .make img {
+    padding: 0;
+    margin-bottom: 60px;
+    width: 50%; }
+  .make .what_we_do {
+    padding-right: 60px;
+    margin-bottom: 60px; }
+    .make .what_we_do h2 {
+      margin-left: 50px;
+      padding-bottom: 20px; }
+    .make .what_we_do .line {
+      margin-top: 30px; }
+      .make .what_we_do .line i {
+        font-size: 60px;
+        margin-left: 50px; }
+      .make .what_we_do .line p {
+        color: #707070;
+        font-size: 16px; }
+      .make .what_we_do .line h3, .make .what_we_do .line p {
+        margin-left: 140px; }
+      .make .what_we_do .line h3 {
+        margin-top: -50px; }
+
+.news h2 {
+  color: #000;
+  text-align: center; }
+
+.news .novelty {
+  padding-top: 40px; }
+  .news .novelty h3 {
+    color: #000;
+    margin-top: 40px; }
+  .news .novelty p {
+    color: #707070;
+    margin-bottom: 35px; }
+  .news .novelty .button {
+    margin-left: 10px; }
+
+.soc-sites {
+  margin-top: 100px;
+  margin-bottom: 50px;
+  background-image: url(../img/soc_bg.jpg);
+  height: 330px; }
+  .soc-sites ul {
+    line-height: 350px;
+    text-align: center; }
+    .soc-sites ul li {
+      display: inline-block;
+      margin-right: 80px; }
+      .soc-sites ul li i {
+        width: 80px;
+        height: 80px;
+        -webkit-border-radius: 50%;
+                border-radius: 50%;
+        border: 2px solid #fff;
+        font-size: 45px;
+        line-height: 70px; }
+        .soc-sites ul li i:hover {
+          -webkit-transform: rotate(360deg);
+              -ms-transform: rotate(360deg);
+                  transform: rotate(360deg);
+          -webkit-transition: -webkit-transform 1s ease;
+          transition: -webkit-transform 1s ease;
+          -o-transition: transform 1s ease;
+          transition: transform 1s ease;
+          transition: transform 1s ease, -webkit-transform 1s ease;
+          border: 2px solid #00aeed; }
+    .soc-sites ul li:first-child {
+      margin-right: 80px; }
+
+.find_us {
+  color: #000; }
+  .find_us h2 {
+    text-align: center;
+    color: #000; }
+  .find_us .contacts {
+    margin-top: 20px;
+    padding-bottom: 50px; }
+    .find_us .contacts h3 {
+      padding-bottom: 30px; }
+    .find_us .contacts .contact {
+      margin-bottom: 55px; }
+      .find_us .contacts .contact a, .find_us .contacts .contact p {
+        color: #585858;
+        font-size: 16px;
+        margin-top: -15px;
+        line-height: 24px;
+        display: block; }
+      .find_us .contacts .contact h4 {
+        font-family: 'LatoBold';
+        font-size: 17px;
+        margin-top: -60px; }
+      .find_us .contacts .contact i {
+        font-size: 60px;
+        color: #585858; }
+      .find_us .contacts .contact h4, .find_us .contacts .contact a, .find_us .contacts .contact p {
+        margin-left: 100px; }
+      .find_us .contacts .contact .fa-mobile {
+        margin-left: 15px; }
+      .find_us .contacts .contact .fa-map-marker {
+        margin-left: 10px; }
+  .find_us .send_us {
+    margin-top: 15px; }
+    .find_us .send_us form {
+      margin-top: 30px; }
+      .find_us .send_us form input, .find_us .send_us form textarea {
+        border: none;
+        margin-top: 10px;
+        border-bottom: 3px solid #cacaca;
+        padding-top: 10px;
+        padding-bottom: 5px;
+        padding-left: 0px;
+        font-family: 'LatoRegular'; }
+      .find_us .send_us form .button {
+        margin-top: 50px;
+        color: #fff; }
+        .find_us .send_us form .button:hover {
+          color: #00aee0; }
+
+footer {
+  background-color: #062736;
+  height: 180px;
+  text-align: center; }
+  footer p {
+    line-height: 140px; }
+  footer span {
+    margin-top: -50px;
+    display: block;
+    font-family: 'LatoRegular';
+    font-size: 17px; }

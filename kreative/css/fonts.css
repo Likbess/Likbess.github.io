@@ -1,0 +1,80 @@
+@font-face {
+    font-family: 'CamptonBoldDEMO';
+    src: url('../fonts/CamptonBoldDEMO/CamptonBoldDEMO.eot');
+    src: url('../fonts/CamptonBoldDEMO/CamptonBoldDEMO.eot') format('embedded-opentype'),
+         url('../fonts/CamptonBoldDEMO/CamptonBoldDEMO.woff2') format('woff2'),
+         url('../fonts/CamptonBoldDEMO/CamptonBoldDEMO.woff') format('woff'),
+         url('../fonts/CamptonBoldDEMO/CamptonBoldDEMO.ttf') format('truetype'),
+         url('../fonts/CamptonBoldDEMO/CamptonBoldDEMO.svg#CamptonBoldDEMO') format('svg');
+}
+
+@font-face {
+    font-family: 'CamptonLightDEMO';
+    src: url('../fonts/CamptonLightDEMO/CamptonLightDEMO.eot');
+    src: url('../fonts/CamptonLightDEMO/CamptonLightDEMO.eot') format('embedded-opentype'),
+         url('../fonts/CamptonLightDEMO/CamptonLightDEMO.woff2') format('woff2'),
+         url('../fonts/CamptonLightDEMO/CamptonLightDEMO.woff') format('woff'),
+         url('../fonts/CamptonLightDEMO/CamptonLightDEMO.ttf') format('truetype'),
+         url('../fonts/CamptonLightDEMO/CamptonLightDEMO.svg#CamptonLightDEMO') format('svg');
+}
+
+@font-face {
+    font-family: 'OpenSansItalic';
+    src: url('../fonts/OpenSansItalic/OpenSansItalic.eot');
+    src: url('../fonts/OpenSansItalic/OpenSansItalic.eot') format('embedded-opentype'),
+         url('../fonts/OpenSansItalic/OpenSansItalic.woff2') format('woff2'),
+         url('../fonts/OpenSansItalic/OpenSansItalic.woff') format('woff'),
+         url('../fonts/OpenSansItalic/OpenSansItalic.ttf') format('truetype'),
+         url('../fonts/OpenSansItalic/OpenSansItalic.svg#OpenSansItalic') format('svg');
+}
+
+@font-face {
+    font-family: 'OpenSansLight';
+    src: url('../fonts/OpenSansLight/OpenSansLight.eot');
+    src: url('../fonts/OpenSansLight/OpenSansLight.eot') format('embedded-opentype'),
+         url('../fonts/OpenSansLight/OpenSansLight.woff2') format('woff2'),
+         url('../fonts/OpenSansLight/OpenSansLight.woff') format('woff'),
+         url('../fonts/OpenSansLight/OpenSansLight.ttf') format('truetype'),
+         url('../fonts/OpenSansLight/OpenSansLight.svg#OpenSansLight') format('svg');
+}
+
+@font-face {
+    font-family: 'OpenSansLightItalic';
+    src: url('../fonts/OpenSansLightItalic/OpenSansLightItalic.eot');
+    src: url('../fonts/OpenSansLightItalic/OpenSansLightItalic.eot') format('embedded-opentype'),
+         url('../fonts/OpenSansLightItalic/OpenSansLightItalic.woff2') format('woff2'),
+         url('../fonts/OpenSansLightItalic/OpenSansLightItalic.woff') format('woff'),
+         url('../fonts/OpenSansLightItalic/OpenSansLightItalic.ttf') format('truetype'),
+         url('../fonts/OpenSansLightItalic/OpenSansLightItalic.svg#OpenSansLightItalic') format('svg');
+}
+
+@font-face {
+    font-family: 'OpenSansRegular';
+    src: url('../fonts/OpenSansRegular/OpenSansRegular.eot');
+    src: url('../fonts/OpenSansRegular/OpenSansRegular.eot') format('embedded-opentype'),
+         url('../fonts/OpenSansRegular/OpenSansRegular.woff2') format('woff2'),
+         url('../fonts/OpenSansRegular/OpenSansRegular.woff') format('woff'),
+         url('../fonts/OpenSansRegular/OpenSansRegular.ttf') format('truetype'),
+         url('../fonts/OpenSansRegular/OpenSansRegular.svg#OpenSansRegular') format('svg');
+}
+
+@font-face {
+    font-family: 'OpenSansSemibold';
+    src: url('../fonts/OpenSansSemibold/OpenSansSemibold.eot');
+    src: url('../fonts/OpenSansSemibold/OpenSansSemibold.eot') format('embedded-opentype'),
+         url('../fonts/OpenSansSemibold/OpenSansSemibold.woff2') format('woff2'),
+         url('../fonts/OpenSansSemibold/OpenSansSemibold.woff') format('woff'),
+         url('../fonts/OpenSansSemibold/OpenSansSemibold.ttf') format('truetype'),
+         url('../fonts/OpenSansSemibold/OpenSansSemibold.svg#OpenSansSemibold') format('svg');
+}
+
+@font-face {
+    font-family: 'OpenSansExtraBold';
+    src: url('../fonts/OpenSansExtraBold/OpenSansExtraBold.eot');
+    src: url('../fonts/OpenSansExtraBold/OpenSansExtraBold.eot') format('embedded-opentype'),
+         url('../fonts/OpenSansExtraBold/OpenSansExtraBold.woff2') format('woff2'),
+         url('../fonts/OpenSansExtraBold/OpenSansExtraBold.woff') format('woff'),
+         url('../fonts/OpenSansExtraBold/OpenSansExtraBold.ttf') format('truetype'),
+         url('../fonts/OpenSansExtraBold/OpenSansExtraBold.svg#OpenSansExtraBold') format('svg');
+}
+

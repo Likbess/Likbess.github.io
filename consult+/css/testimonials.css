@@ -1,0 +1,74 @@
+.clients {
+  padding-top: 60px; }
+  .clients h2 {
+    text-align: left;
+    padding-left: 15px;
+    padding-bottom: 30px; }
+  .clients .client {
+    padding-bottom: 50px; }
+    .clients .client p, .clients .client h5, .clients .client .designation {
+      padding-left: 135px; }
+    .clients .client p {
+      margin-top: -100px; }
+    .clients .client h5 {
+      margin-top: 30px;
+      text-transform: uppercase;
+      font-size: 14px; }
+    .clients .client span p {
+      margin-top: -40px;
+      font-size: 13px; }
+    .clients .client i {
+      float: right;
+      color: #ffac55;
+      margin-top: -80px; }
+
+.owl-carousel-sixth {
+  padding-top: 120px;
+  background-image: url(../img/testimonials_bg.jpg);
+  height: 550px;
+  color: #fff; }
+  .owl-carousel-sixth p {
+    color: #fff;
+    font-size: 18px; }
+  .owl-carousel-sixth h5 {
+    font-size: 20px; }
+  .owl-carousel-sixth i {
+    font-size: 40px; }
+  .owl-carousel-sixth span p {
+    color: #caccce;
+    font-size: 14px;
+    margin-top: -30px; }
+  .owl-carousel-sixth .fa-quote-right, .owl-carousel-sixth .fa-quote-left {
+    position: relative; }
+  .owl-carousel-sixth .fa-quote-right {
+    left: 600px;
+    bottom: 70px; }
+  .owl-carousel-sixth .fa-quote-left {
+    right: 80px; }
+  .owl-carousel-sixth .owl-dots .owl-dot {
+    width: 102px;
+    height: 102px;
+    border: 5px solid #fff;
+    margin-left: 20px; }
+  .owl-carousel-sixth .owl-dots .owl-dot:first-child {
+    background-image: url(../img/client_face_1.png); }
+  .owl-carousel-sixth .owl-dots .owl-dot:nth-child(2) {
+    background-image: url(../img/client_face_2.png); }
+  .owl-carousel-sixth .owl-dots .owl-dot:nth-child(3) {
+    background-image: url(../img/client_face_3.png); }
+  .owl-carousel-sixth .owl-dots .owl-dot:last-child {
+    background-image: url(../img/client_face_4.png); }
+  .owl-carousel-sixth .owl-dots .active {
+    border: 5px solid #ffac55;
+    background-color: #fff;
+    -webkit-box-shadow: 0px 0px 0px 10px rgba(255, 172, 85, 0.4);
+            box-shadow: 0px 0px 0px 10px rgba(255, 172, 85, 0.4); }
+
+#Projects {
+  padding-bottom: 80px;
+  margin-top: 100px; }
+  #Projects h1 {
+    padding-bottom: 10px; }
+
+h1 {
+  padding-bottom: 60px; }

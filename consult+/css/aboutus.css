@@ -1,0 +1,80 @@
+.title {
+  padding-bottom: 100px; }
+
+-webkit-input-placeholder {
+  color: #666;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: #d4f6ff;
+  font-family: 'MontserratRegular'; }
+
+.AboutUs {
+  padding-bottom: 100px; }
+  .AboutUs .block h2 {
+    padding-top: 90px; }
+  .AboutUs .block p {
+    line-height: 28px;
+    padding-right: 40px; }
+  .AboutUs .block h2, .AboutUs .block p {
+    text-align: left; }
+  .AboutUs .video .video_bg {
+    position: relative;
+    top: 110px;
+    right: 15px;
+    width: 490px; }
+  .AboutUs .video .play {
+    position: relative;
+    bottom: 170px;
+    left: 130px; }
+  .AboutUs form {
+    padding-top: 20px;
+    background-color: #03b6e7;
+    padding-left: 30px;
+    color: #fff; }
+    .AboutUs form *::-webkit-input-placeholder {
+      text-transform: uppercase;
+      font-size: 13px;
+      color: #d4f6ff;
+      font-family: 'MontserratRegular'; }
+    .AboutUs form h3 {
+      padding-bottom: 10px; }
+    .AboutUs form input {
+      background-color: #03b6e7;
+      border: none;
+      border-bottom: 1px solid #7cddf7; }
+    .AboutUs form .email {
+      margin-left: 20px; }
+    .AboutUs form textarea {
+      background-color: #03b6e7;
+      border: none;
+      padding-top: 10px;
+      border-bottom: 1px solid #7cddf7; }
+    .AboutUs form .button {
+      border: 2px solid transparent;
+      margin-bottom: 30px;
+      float: left;
+      font-size: 13px;
+      line-height: 40px; }
+
+.Offers {
+  text-align: center;
+  background-color: #e7eff1;
+  padding-top: 80px;
+  padding-bottom: 80px; }
+  .Offers .col-md-4 {
+    background-color: #fff;
+    width: 340px;
+    margin-left: 30px;
+    text-align: center; }
+    .Offers .col-md-4 img {
+      width: 340px;
+      margin-left: -15px; }
+    .Offers .col-md-4 .button {
+      margin-bottom: 30px;
+      width: 155px; }
+
+footer h4 {
+  padding-top: 0px; }
+
+footer .logo {
+  padding-top: 140px; }
