@@ -129,7 +129,9 @@ header {
 
 .owl-carousel {
   height: auto;
-  background-image: url(../img/backgr-testimonials.jpg); }
+  background-image: url(../img/backgr-testimonials.jpg);
+  background-size: cover;   
+}
   .owl-carousel img {
     float: left;
     height: 400px;
