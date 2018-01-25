@@ -171,7 +171,9 @@ header {
       display: inline-block; }
     .owl-carousel .owl-dots .active {
       background-color: #00aeed; }
-
+  .owl-carousel .owl-stage {
+    top: 20px;
+}
 .services {
   padding-bottom: 80px;
   padding-top: 80px;
