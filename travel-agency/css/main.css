@@ -137,7 +137,9 @@ header {
     height: 400px;
     width: auto !important;
     display: block;
-    margin-top: 65px; }
+    position: relative;
+    top: 40px;
+}
   .owl-carousel .comment {
     text-align: center; }
     .owl-carousel .comment i {
