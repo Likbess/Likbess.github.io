@@ -1,0 +1,8 @@
+@import "_mixins/font-face";
+
+@include font-face("raleway-regular", "../fonts/RalewayRegular/RalewayRegular", 400);
+@include font-face("raleway-bold", "../fonts/RalewayBold/RalewayBold", 700);
+@include font-face("raleway-light", "../fonts/RalewayLight/RalewayLight", 300);
+@include font-face("open-sans-regular", "../fonts/OpenSansRegular/OpenSansRegular", 400);
+@include font-face("open-sans-semibold", "../fonts/OpenSansSemiBold/OpenSansSemiBold", 600);
+@include font-face("open-sans-bold", "../fonts/OpenSansBold/OpenSansBold", 700);
