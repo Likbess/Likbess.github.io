@@ -1,0 +1,256 @@
+@import "vars";
+
+@media (max-width: 1200px) {
+	.owl-1 {
+		height: 1000px;
+	}
+	.application .arrows{
+		top: 120px;
+	}
+	.right-side {
+		position: relative;
+		bottom: 260px;
+	}
+    .prices table {
+  	width: 100%;
+  	margin-top: 30px;
+  }
+  .scheme {
+  	.row {
+
+  	}
+  .col-lg-2 {
+  	margin-top: 20px;
+  }
+ }
+  .rest {
+  	padding-top: 0px !important;
+  	textarea, button {
+  		margin-left: 0 !important;
+  		}
+	}
+	.inputs {
+		padding-bottom: 10px !important;	
+	}
+}
+
+/*==========  Desktop First  ==========*/
+
+// TODO: убрать у левой таблицы отступ слева, при маленьком экране
+// 100% ширину для таблицы при md
+// изменить height у owl-1
+// убрать margin-left у последней кнопки
+
+/* xs - устройства (до 576px) */
+/* CSS для ширины, которая меньше 575px (включительно) */
+
+@media (max-width: 540px) {
+	.under-table {
+		a {
+			width: 100%;
+			display: inline-block;
+		}
+		img {
+			margin-top: 10px;
+			margin-left: 5px;
+		}
+	}
+	.right-side table {
+		th {
+			&:first-child {
+				width: 90px;
+			}
+		}
+		td {
+			font-size: 12px;
+		}
+		tr td:first-child {
+			padding-left: 10px;
+			font-size: 12px;
+		}
+	}
+}
+/* sm-устройства (больше или равно 576px) */
+
+
+@media (max-width: 497px) {
+	.application .arrows {
+		top: 155px !important;
+		left: 150px;
+	}
+}
+
+/* md-устройства (больше или равно 768px) */
+@media (max-width: 768px) {
+  /* CSS для: 768px <= ширины <= 991px */
+  .line-description .ndc {
+  	float: none;
+  	text-align: left;
+  }
+  .items {
+  	flex-wrap: wrap;
+  	justify-content: center;
+  	.item {
+  		margin: 0;
+  		width: 204px;
+  	}
+  }
+  .hidn {
+  	display: block;
+  	height: 5px;
+  }
+  .advantages {
+  	.item {
+  		margin: 20px 0;
+  		h3 {
+  			margin-top: 5px;
+  		}
+  	}
+  }
+  .additionally img {
+    	box-shadow: 0px -12px 15px 0px rgba(222,222,222,0.6);
+  	}
+  .owl-1 {
+  	.kinds {
+	    .navigation {
+	  	justify-content: center;
+	  	flex-direction: column;
+		h3 {
+			margin-bottom: 0;
+			position: relative;
+			top: 25px;
+		}
+  		}
+  		.arrow-next, .arrow-left {
+  			display: none;
+  		}
+  	}
+  }
+}
+ 
+/* lg-устройства (больше или равно 992px) */
+@media (max-width: 992px) {
+	.owl-1 {
+		height: 1100px;
+	}
+	.owl-prev, .owl-next {
+		top: 100px;
+	}
+	.stages {
+		flex-wrap: wrap;
+	}
+}
+@media (max-width: 576px) {
+  /* CSS для: 576px <= ширины <= 767px */
+  .line-description {
+  	a {
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		img {
+			padding-right: 20px;
+		}
+  	}
+  }
+	.under-table {
+		button {
+			padding: 8px 20px;
+		}
+	}
+  .owl-1 {
+  	height: 1150px;
+  	padding-bottom: 20px;
+	.kinds {
+	    .navigation, .center {
+		h3 {
+			font-size: 16px;
+		}
+  	}
+  }
+}
+
+  .owl-nav 	.owl-prev, .owl-nav .owl-next {
+  	top: 60px;
+  	}
+  	.owl-prev {
+  		left: 10px;
+  	}
+  	.owl-next {
+  		right: 10px;
+  	}
+  .complex {
+  	padding-top: 20px;
+  }
+
+  .right-text {
+  	img {
+  		width: 100%;
+  	}
+  	h2 {
+  		font-size: 18px !important;
+  	}
+  }
+
+  .stages {
+  	justify-content: center;
+  }
+}
+/* xl-устройства (больше или равно 1200px) */
+ @media (max-width: 352px) {
+	.application .arrows {
+		top: 195px !important;
+		left: 150px;
+	}
+}
+@media (max-width: 420px) {
+	.right-side table {
+		th {
+			&:first-child {
+				width: 60px;
+			}
+		}
+		* {
+			font-size: 10px;
+		}
+		tr td:first-child {
+			padding-left: 5px;
+			font-size: 10px;
+		}
+	}
+}
+@media (max-width: 440px) {
+  /* CSS для: 576px <= ширины <= 767px */
+	.owl-1 {
+		height: 1200px;
+	}
+	.mini-item p {
+		text-align: center;
+	}
+
+  .scheme {
+  	.col-xd {
+  		width: 100%;
+  		background-size: cover;
+  		margin: 20px 50px;
+  	}
+  }
+  .table {
+  	td {
+  		font-size: 15px;
+  	}
+  	th {
+  		font-size: 16px;
+
+  	}
+  	.last-th, td:nth-child(2) {
+		margin-right: 5px;
+		padding-right: 0;
+  	}
+  	.first-th {
+  		padding-left: 5px;
+  	}
+  	td:nth-child(1) {
+  		padding-left: 5px;
+  	}
+  }
+}
