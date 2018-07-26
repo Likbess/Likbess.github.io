@@ -710,11 +710,12 @@ label[for="price-5"] {
 .poisk-area {background-color: #fff;}
 .poisk-district {display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;justify-content: space-between;-webkit-flex-wrap: wrap;-moz-flex-wrap: wrap;-ms-flex-wrap: wrap;-o-flex-wrap: wrap;flex-wrap: wrap;padding-left: 35px;}
 .dist {padding: 20px 40px;}
-.edit-1 {padding-right: 10px;padding-left: 18px;}
-.edit-2 {padding-left: 5px;padding-right: 20px;}
+.edit-1 {padding-right: 2px;padding-left: 18px;}
+.edit-2 {padding-left: 5px;padding-right: 20px;margin-right: 12px;}
 .edit-3 {padding-left: 20px;padding-right: 50px;}
+.edit-0 {position: relative;right: 15px;}
 .metro, .services {background-color: #fff;}
-.stations .station, .services .service {display: block;padding: 6px 20px;}
+.stations .station, .services .service {padding: 6px 20px;}
 .metro-item { display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;padding: 20px 55px;}
 .img-metro {width: 45%;}
 .services-item {display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex; padding: 20px 55px;}
@@ -726,6 +727,115 @@ label[for="price-5"] {
 	padding: 15px 0;
 }
 
+@media (max-width: 1199px) {
+	.poisk-row .poisk-items {
+		justify-content: center;
+	}
+	.metro-item {
+		padding: 20px 25px;
+	}
+	.img-metro {
+		width: 40%; 
+		height: 40%;
+		position: relative;
+		top: 100px;
+	}
+	.stations .station {
+		padding: 6px 9px;
+	}
+	.services .service {
+		padding: 6px;
+	}
+}
+ 
+
+@media (max-width: 887px) {
+		.services .service {
+		font-size: 12px;
+	}
+	.stations .station {
+		padding: 6px 7px;
+	}
+	.poisk-district {
+		justify-content: center;
+	}
+	.edit-1, .edit-2, .edit-3, .dist {
+		padding: 15px 20px;
+	}
+	.metro-item {
+		-webkit-flex-wrap: wrap;
+		-moz-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		-o-flex-wrap: wrap;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	.img-metro {
+		width: 80%;
+		height: 350px;
+		position: relative;
+		top: 0px;
+		padding: 40px 0;
+	}
+}
+ 
+
+@media (max-width: 802px) { 
+	.services-item {
+		-webkit-flex-wrap: wrap;
+		-moz-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		-o-flex-wrap: wrap;
+		flex-wrap: wrap;
+		padding: 20px 5px;
+
+	}
+}
+ 
+@media (max-width: 719px) { 
+		.services-item {
+			justify-content: flex-end;
+		}
+}
+
+@media (max-width: 581px) {
+		.services .service {
+		font-size: 10px;
+	}
+	.stations .station {
+		font-size: 11px;
+	}
+	.img-metro {
+		display: none;
+	}
+}
+@media (max-width: 509px) {
+		.services-item {
+			display: block;
+			text-align: center;
+	}
+	.services .service {
+		font-size: 16px;
+	}
+
+	.services p {
+		font-size: 24px;
+		margin-left: 0;
+		padding: 25px 0;
+	}
+}
+@media (max-width: 509px) {
+	.metro-item {
+		display: block;
+		text-align: center;
+	}
+	.poisk-item.box {
+		min-width: 160px;
+	}
+	.stations .station {
+		font-size: 16px;
+	}
+}
 
 
 /* Нормальные размеры как в dist вернуть, обнулить edit */
