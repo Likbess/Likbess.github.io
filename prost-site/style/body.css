@@ -790,6 +790,9 @@ label[for="price-5"] {
 		padding: 20px 5px;
 
 	}
+	.poisk-district {
+		padding-left: 0;
+	}
 }
  
 @media (max-width: 719px) { 
