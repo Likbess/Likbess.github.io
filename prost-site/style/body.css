@@ -1,9 +1,9 @@
 ﻿@viewport{user-zoom:fixed;}*{padding:0;margin:0;-webkit-appearance:none;}label{cursor:pointer;}textarea{resize:none;}a, button, input, textarea{outline:none;}:focus{outline:none;}button::-moz-focus-inner{padding:0;border:0;}img{max-width:100%;vertical-align:top;}a, img{border:0;}
 a{outline:none;color:#28587f;text-decoration:none;} a:hover{text-decoration:underline;}
 body{color:#252525;font:400 14px 'Open Sans',Arial;line-height:18px;text-align:center;background:#edeef0;}
-html, body{height:100%;width:100%;min-width:300px;}
+html, body{height:100%;width:100%;min-width:300px; overflow-x: hidden;}
 
-.row{display:table;width:100%;}div[class^=col-md]{display:table-cell;text-align:left;vertical-align:top;}
+.row{display:table;width:100%;}div[class^=col-md]{display:table-cell;text-align:left;vertical-align:top;z-index: 2;}
 	.col-md-2{width:16.667%;}
 	.col-md-3{width:25%;}
 	.col-md-4{width:32.526%;}
@@ -171,7 +171,7 @@ box-shadow: 1px 1px 3px rgba(0,0,0,0.3);}
 
 .persons-wrap{position:relative;left:3px;padding:0 0 45px 0;}
 .persons-wrap-main{margin: 0 0 0 -14px;}
-.person-bl{display:inline-block;overflow:hidden;width:405px;height:228px;color:#404040;font-size:12px;line-height:14px;text-decoration:none;vertical-align:top;padding:11px 8px 0 10px;margin:0 0 15px 11px;border:solid 1px #dadada;background:#fff;-moz-box-shadow:0 1px 6px rgba(0,0,0, 0.17);-webkit-box-shadow:0 1px 6px rgba(0,0,0, 0.17);box-shadow:0 1px 6px rgba(0,0,0, 0.17);}
+.person-bl{z-index: 2;display:inline-block;overflow:hidden;width:405px;height:228px;color:#404040;font-size:12px;line-height:14px;text-decoration:none;vertical-align:top;padding:11px 8px 0 10px;margin:0 0 15px 11px;border:solid 1px #dadada;background:#fff;-moz-box-shadow:0 1px 6px rgba(0,0,0, 0.17);-webkit-box-shadow:0 1px 6px rgba(0,0,0, 0.17);box-shadow:0 1px 6px rgba(0,0,0, 0.17);}
 .person-bl .title,.person-bl .photo,.person-bl .text{position:relative;overflow:hidden;height:208px;}
 .person-bl .text{padding-top: 0px;}
 .person-bl .title{height:36px;}
@@ -647,7 +647,6 @@ font-size: 10pt;
 .item-person{
 	display:flex;
 }
-.col-md-6-s{width:100%;}
 
 
 
@@ -778,7 +777,92 @@ label[for="price-5"] {
    .edit-3 {position: relative;right: 23px;}
 }
 
-/* Нормальные размеры как в dist вернуть, обнулить edit */
+#images, #thumbs {
+	overflow: hidden;
+}
+#images {
+	width: 291px !important;
+}
+.here {
+	font-size: 18px;
+	margin-top: 45px;
+	margin-bottom: 10px;
+}
+.owl-carousel {
+	max-width: 850px;
+	position: relative;
+	right: 30px;
+	z-index: 2;
+}
+.phone img { 
+	width: 20px;
+	display: inline-block;
+}
+
+#thumbs {
+	width: 291px !important;
+	height: 100px !important;
+	right: 12px;
+}
+#thumbs img {
+	margin: 10px 3px !important;
+	cursor: pointer;
+	text-align: center;
+	border: 1px solid #CFD0D1;
+}
+.arrows {
+	position: relative;
+}
+.owl-stage {
+	z-index: 2;
+}
+#prev, #next {
+	width: 28px;
+	height: 28px;			
+	display: block;				
+	position: absolute;
+	bottom: 285px;				
+}
+#prev {
+	left: -15px;
+}
+
+#prev:hover {
+	cursor: pointer;
+}			
+#next {
+	right: -5px;
+}
+#next:hover {
+	cursor: pointer;
+}			
+.profil_anketa_about_text {
+	font-size: 14px;
+	padding-bottom: 26px;
+}	
+
+.owl-prev, .owl-prev span, .owl-next, .owl-next span {
+	font-size: 30px;
+	width: 20px;
+	height: 20px;
+	display: block;
+	color: #fff;
+	background-color: #4E443C;
+	border-radius: 50%;
+	padding: 4px 5px 6px 5px;
+	margin-bottom: 2px;
+	position: relative;
+	bottom: 75px;
+}
+.owl-prev span {
+	right: 25px;
+}
+.owl-next span {
+	left: 857px;
+	z-index: 999;
+	bottom: 100px;
+}
+
 /** Carousel **/
 
 .jcarousel-wrapper {

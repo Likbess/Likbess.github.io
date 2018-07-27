@@ -113,4 +113,43 @@ $(document).ready(function(){
 	$(filtSlider).find(".ui-slider-handle").eq(0).html('<i>'+$(filtSlider).slider("values",0)+'</i>');
 	$(filtSlider).find(".ui-slider-handle").eq(1).html('<i>'+$(filtSlider).slider("values",1)+'</i>');
 });
+$(function() {
+	$('#thumbs').carouFredSel({
+		synchronise: ['#images', false, true],
+		auto: false,
+		width: 291,
+		prev: '#prev',
+		next: '#next',
+		items: {
+			visible: 4,
+			start: -1
+		},
+		scroll: {
+			onBefore: function( data ) {
+				data.items.old.eq(1).removeClass('selected');
+				data.items.visible.eq(1).addClass('selected');
+			}
+		},
+	});
+
+	$('#images').carouFredSel({
+		auto: false,
+		items: 1,
+		scroll: {
+			fx: 'fade'
+		}
+	});
+
+	$('#thumbs img').click(function() {
+		$('#thumbs').trigger( 'slideTo', [this, -1] );
+	});
+	$('#thumbs img:eq(1)').addClass('selected');
+});
+
+$('.owl-carousel').owlCarousel({
+    items: 2,
+    margin: 30,
+    nav: true,
+    loop: true
+})
 
