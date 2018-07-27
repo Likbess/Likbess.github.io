@@ -788,6 +788,7 @@ label[for="price-5"] {
 	z-index: 2;
 	text-align: center;
 	position: relative;
+	left: 13px;
 }
 
 .phone img { 
