@@ -659,6 +659,7 @@ font-size: 10pt;
 	justify-content: space-between;
 	-webkit-flex-wrap: wrap;-moz-flex-wrap: wrap;-ms-flex-wrap: wrap;-o-flex-wrap: wrap;flex-wrap: wrap;
 	user-select: none;
+
 }
 .poisk_main_row_title { text-align: center; font-size: 24px; font-weight: 600; padding: 25px 0; }
 .poisk_main_title{font-size:26px; text-align: center; padding: 15px 0;}
@@ -672,7 +673,6 @@ font-size: 10pt;
 	padding: 10px 75px;
 	display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;
 	-webkit-flex-direction: column;-moz-flex-direction: column;-ms-flex-direction: column;-o-flex-direction: column;flex-direction: column;
-
 }
 
 .poisk-item label {
@@ -708,7 +708,7 @@ label[for="price-5"] {
 .search-button {border: none;background-color: #F76B6C;color: #fff;text-align: center;margin: 17px auto;display: block;padding: 10px 82px;font-size: 18px;font-weight: bold;cursor: pointer;
 }
 .poisk-area {background-color: #fff;}
-.poisk-district {display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;justify-content: space-between;-webkit-flex-wrap: wrap;-moz-flex-wrap: wrap;-ms-flex-wrap: wrap;-o-flex-wrap: wrap;flex-wrap: wrap;padding-left: 35px;}
+.poisk-district {max-width: 1163px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;justify-content: space-between;-webkit-flex-wrap: wrap;-moz-flex-wrap: wrap;-ms-flex-wrap: wrap;-o-flex-wrap: wrap;flex-wrap: wrap;padding-left: 35px;}
 .dist {padding: 20px 40px;}
 .edit-1 {padding-right: 0px;padding-left: 24px;}
 .edit-2 {padding-left: 9px;padding-right: 20px;margin-right: 20px;}
@@ -728,120 +728,55 @@ label[for="price-5"] {
 }
 
 @media (max-width: 1199px) {
-	.poisk-row .poisk-items {
-		justify-content: center;
-	}
-	.metro-item {
-		padding: 20px 25px;
-	}
-	.img-metro {
-		width: 40%; 
-		height: 40%;
-		position: relative;
-		top: 100px;
-	}
-	.stations .station {
-		padding: 6px 9px;
-	}
-	.services .service {
-		padding: 6px;
-	}
+	.poisk-row .poisk-items {justify-content: center;}
+	.metro-item {padding: 20px 25px;}
+	.img-metro {width: 40%; height: 40%;position: relative;top: 100px;}
+	.stations .station {padding: 6px 9px;}
+	.services .service {padding: 6px;}
 }
- 
 
 @media (max-width: 887px) {
-		.services .service {
-		font-size: 12px;
-	}
-	.stations .station {
-		padding: 6px 7px;
-	}
-	.poisk-district {
-		justify-content: center;
-	}
-	.edit-1, .edit-2, .edit-3, .edit-0, .dist {
-		padding: 15px 20px;
-		right: 0;
-		margin-right: 0;
-	}
-	.metro-item {
-		-webkit-flex-wrap: wrap;
-		-moz-flex-wrap: wrap;
-		-ms-flex-wrap: wrap;
-		-o-flex-wrap: wrap;
-		flex-wrap: wrap;
-		justify-content: center;
-	}
-	.img-metro {
-		width: 80%;
-		height: 350px;
-		position: relative;
-		top: 0px;
-		padding: 40px 0;
-	}
+	.services .service {font-size: 12px;}
+	.stations .station {padding: 6px 7px;}
+	.poisk-district {justify-content: center;}
+	.edit-1, .edit-2, .edit-3, .edit-0, .dist {padding: 15px 20px;right: 0;margin-right: 0;left: 0;}
+	.metro-item {-webkit-flex-wrap: wrap;-moz-flex-wrap: wrap;-ms-flex-wrap: wrap;-o-flex-wrap: wrap;flex-wrap: wrap;justify-content: center;}
+	.img-metro {width: 80%;height: 350px;position: relative;top: 0px;padding: 40px 0;}
 }
- 
-
 @media (max-width: 802px) { 
-	.services-item {
-		-webkit-flex-wrap: wrap;
-		-moz-flex-wrap: wrap;
-		-ms-flex-wrap: wrap;
-		-o-flex-wrap: wrap;
-		flex-wrap: wrap;
-		padding: 20px 5px;
-
-	}
-	.poisk-district {
-		padding-left: 0;
-	}
+	.services-item {-webkit-flex-wrap: wrap;-moz-flex-wrap: wrap;-ms-flex-wrap: wrap;-o-flex-wrap: wrap;flex-wrap: wrap;padding: 20px 5px;}
+	.poisk-district {padding-left: 0;}
 }
  
 @media (max-width: 719px) { 
-		.services-item {
-			justify-content: flex-end;
-		}
+	.services-item {justify-content: flex-end;}
 }
 
 @media (max-width: 581px) {
-		.services .service {
-		font-size: 10px;
-	}
-	.stations .station {
-		font-size: 11px;
-	}
-	.img-metro {
-		display: none;
-	}
+	.services .service {font-size: 10px;}
+	.stations .station {font-size: 11px;}
+	.img-metro {display: none;}
 }
 @media (max-width: 509px) {
-		.services-item {
-			display: block;
-			text-align: center;
-	}
-	.services .service {
-		font-size: 16px;
-	}
-
-	.services p {
-		font-size: 24px;
-		margin-left: 0;
-		padding: 25px 0;
-	}
+	.services-item {display: block;text-align: center;}
+	.services .service {font-size: 16px;}
+	.services p {font-size: 24px;margin-left: 0;padding: 25px 0;}
 }
 @media (max-width: 509px) {
-	.metro-item {
-		display: block;
-		text-align: center;
-	}
-	.poisk-item.box {
-		min-width: 160px;
-	}
-	.stations .station {
-		font-size: 16px;
-	}
+	.metro-item {display: block;text-align: center;}
+	.poisk-item.box {min-width: 160px;}
+	.stations .station {font-size: 16px;}
 }
 
+ /*   Для IE10+   */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+   .img-metro {width: 484px;}
+   .edit-1, .edit-2, .edit-0, .edit-3 {padding: 15px 30px ;}
+   .edit-1 {position: relative;left: 4px;}
+   .edit-2, .edit-0 {position: relative;right: 37px;}
+   .edit-0 {right: 47px;}
+   .edit-3 {position: relative;right: 23px;}
+}
 
 /* Нормальные размеры как в dist вернуть, обнулить edit */
 /** Carousel **/
