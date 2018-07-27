@@ -15,7 +15,7 @@ html, body{height:100%;width:100%;min-width:300px; overflow-x: hidden;}
 	.col-md-12{width:100%;}
 	div[class^=col-md] + div[class^=col-md]{padding-left:26px;}
 	div[class^=col-md] + div[class^=col-md-4]{padding-left:11px;}
-
+.col-md-6-s {width: 100%;}
 .page-width{min-height:100%;height:auto !important;height:100%;margin:0 auto;background:#edf3ff;}
 .page-bl{min-width:280px;max-width:1168px;width:98%;text-align:left;margin:0 auto;}
 .page_head{border-top: solid 3px #5395d0;border-bottom: solid 3px #5395d0;}
@@ -789,11 +789,10 @@ label[for="price-5"] {
 	margin-bottom: 10px;
 }
 .owl-carousel {
-	max-width: 850px;
-	position: relative;
-	right: 30px;
+	max-width: 880px;
 	z-index: 2;
 }
+
 .phone img { 
 	width: 20px;
 	display: inline-block;
@@ -855,12 +854,23 @@ label[for="price-5"] {
 	bottom: 75px;
 }
 .owl-prev span {
-	right: 25px;
+	right: 35px;
+}
+.icon-metro, .icon-phone {
+	padding-right: 10px;
+	margin-top: 4px;
+}
+.icon-phone {
+	margin-top: 1px;
 }
 .owl-next span {
-	left: 857px;
+	left: 888px;
 	z-index: 999;
 	bottom: 100px;
+}
+.owl-item:nth-child(1n + 1) {
+	position: relative;
+	right: 10px;
 }
 
 /** Carousel **/
