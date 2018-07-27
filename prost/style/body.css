@@ -352,7 +352,7 @@ color: #fff;}
 	.row,div[class^=col-md]{display:block;width:auto;}
 	div[class^=col-md] + div[class^=col-md]{padding-left:0;}
 	.sub-nav div[class^=col-md]{width:auto !important;}
-
+	.s-nav-link::after {right: -1px;height: 29px;}
 	.site-footer .banners{display:none;}
 	.site-footer .copy{text-align:center;padding:0;}
 
@@ -521,22 +521,6 @@ ul.read-more-wrap li span {color: #000;}
 }
 
 
-
-.icon-remove::before {
-
-    content: "✖";
-
-}
-
-
-
-.icon-ok::before {
-
-    content: '✔';
-
-}
-
-
 .table-borderless .icon-ok {
     color: green;
 	display: inline-block;
@@ -564,9 +548,9 @@ ul.read-more-wrap li span {color: #000;}
 .profil_anketa_phone{display: inline-block;font-size: 12pt;width:32%;}
 .profil_anketa_metro{display: inline-block;font-size: 12pt;width:32%;}
 
-.profil_anketa_about{border:1px solid #d3d7df; margin-top: 15px;}
-.profil_anketa_about_title{background: #28587f;color:#fff;padding: 5px 15px;font-weight: bold;font-size:14pt;text-align:center;}
-.profil_anketa_about_text{background: #fff;padding: 10px;}
+.profil_anketa_about{ margin-top: 15px;}
+.profil_anketa_about_title{background: #28587f;color:#fff;padding: 5px 15px;font-weight: bold;font-size:14pt;text-align:center;border:1px solid #d3d7df;}
+.profil_anketa_about_text{background: #fff;padding: 10px;border:1px solid #d3d7df;}
 
 .profil_anketa_2{background: #28587f;color:#fff;padding: 10px;}
 .prov-body{
@@ -581,6 +565,11 @@ ul.read-more-wrap li span {color: #000;}
 }
 .p-item{
 		padding:5px;
+
+}
+
+.p-item1 img {
+	margin-right: 5px;
 }
 .cf-a{
 	margin-top:15px;border: 1px solid #d3d7df;
@@ -732,6 +721,12 @@ label[for="price-5"] {
 	.img-metro {width: 40%; height: 40%;position: relative;top: 100px;}
 	.stations .station {padding: 6px 9px;}
 	.services .service {padding: 6px;}
+	.item-person {-webkit-flex-wrap: wrap;
+	-moz-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	-o-flex-wrap: wrap;
+	flex-wrap: wrap;}
+
 }
 
 @media (max-width: 887px) {
@@ -791,6 +786,8 @@ label[for="price-5"] {
 .owl-carousel {
 	max-width: 880px;
 	z-index: 2;
+	text-align: center;
+	position: relative;
 }
 
 .phone img { 
@@ -836,8 +833,7 @@ label[for="price-5"] {
 	cursor: pointer;
 }			
 .profil_anketa_about_text {
-	font-size: 14px;
-	padding-bottom: 26px;
+	padding-bottom: 13px;
 }	
 
 .owl-prev, .owl-prev span, .owl-next, .owl-next span {
@@ -872,7 +868,164 @@ label[for="price-5"] {
 	position: relative;
 	right: 10px;
 }
+@media (max-width: 1199px) {
+	.owl-next span {
+		left: 660px;
+	}
+	.hide {
+		visibility: hidden;
+	}
+	.active .hide {
+		visibility: visible;
+	}
+	.owl-prev span {
+		right: 0px;
+	}
+	.item-person {
+		margin-right: 80px;
+	}
+	.bg-a {
+		display: -webkit-flex;
+		display: -moz-flex;
+		display: -ms-flex;
+		display: -o-flex;
+		display: flex;
+		width: 100%;
+	}
+	.profil_anketa_about {
+		display: block;
+		width: 100%;
+		margin-left: 20px;
+		margin-top: 30px;
+	}
+	.profil_anketa_about_text {
+		padding: 20px 80px;
+	}
+}
+@media (max-width: 900px) {
+	.owl-prev span {
+		left: 100px;
+	}
+	.owl-next span {
+		left: 760px;
+	}
+	.col-md-6-s {
+		width: 100% !important;
+	}
+	.item-person {
+		margin-right: 10px;
+	}
+	.person-bl {
+		float: none !important;
+	}
+}
+@media (max-width: 800px) {
+	.owl-next span {
+		left: 660px;
+	}
+	.profil_anketa_about_text {
+		padding: 20px 30px;
+	}
+}
+@media (max-width: 700px) {
+	.owl-next span {
+		left: 560px;
+	}
+	.owl-prev span {
+		left: 50px;
+	}
+	.slider {
+		margin: 20px;
+	}
+}
+@media (max-width: 700px) {
+	.owl-next span, .owl-prev span, .owl-nav {
+		display: none;
+	}
+	.owl-dots {
+		margin-bottom: 30px;
+		text-align: center;
+	}
+	.owl-carousel .owl-dots button.owl-dot {
+		height: 10px;
+		width: 10px;
+		border-radius: 50%;
+		margin-right: 10px;
+		background: #EDF3FF;
+		border: 1px solid #28587F;
+	}
+.owl-carousel .owl-dots button.owl-dot.active {
+		background-color: #28587F;
+	}
+	.profil_anketa_about {
+		margin-top: 30px;
+		width: 100%;
+	}
+	.bg-a {
+		-webkit-flex-wrap: wrap;
+		-moz-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		-o-flex-wrap: wrap;
+		flex-wrap: wrap;
+	}
+	.slider {
+		margin: 0 auto;
+	}
+}
+@media (max-width: 700px) {
+	.prov-item1 {
+		-webkit-flex-direction: column;
+		-moz-flex-direction: column;
+		-ms-flex-direction: column;
+		-o-flex-direction: column;
+		flex-direction: column;
+		text-align: center;
+	}
+    .prov-item-1 span {
+    	margin: 15px auto;
+    	display: block;
+    	text-align: center;
+    	font-size: 20px;
 
+    }
+	.p-item1 {
+		width: 100%;
+	}
+}
+@media (width: 724px) {
+	.poisk-item.growth, .poisk-item.oppai {
+		padding: 20px 131px;
+	}
+}
+@media (max-width: 500px) {
+	.prov-body {
+		justify-content: center;
+	}
+	.prov-item {
+		padding-left: 10px;
+		width: auto;
+	}
+	.profil_anketa_name, .profil_anketa_phone, .profil_anketa_metro {
+		width: 100%;
+		text-align: center;
+		padding: 10px 0;
+	}
+	.param {
+		display: block;
+		text-align: center;
+	}
+}
+@media (max-width: 400px) {
+	.item-person {
+		margin-right: 0;
+	}
+	.slider {
+		margin-left: 20px !important;
+	}
+	.person-bl * {
+		display: block;
+	}
+}
 /** Carousel **/
 
 .jcarousel-wrapper {

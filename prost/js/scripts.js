@@ -150,6 +150,17 @@ $('.owl-carousel').owlCarousel({
     items: 2,
     margin: 35,
     nav: true,
-    loop: true
+    loop: true,
+    responsive:{
+    	0:{
+    		items:1
+    	},
+    	1199:{
+    		items:1
+    	},
+    	1200:{
+    		items:2
+    	}
+    }
 })
 
