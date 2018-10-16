@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .stiker {
+        box-shadow: border-box;
+        position: absolute;
+        padding: 10px;
+        font: italic 15px Arial;
+    }
+    </style>
+</head>
+<body>
+    <script>
+    
+    class Stiker {
+        constructor(parent, key, id, zIndexer) { // key для сохранения, id - уникальный id
+            this._elem = document.createElement('textarea');
+            this._elem.className = 'stiker';
+
+            this._parent = parent;
+            this._parent.appendChild(this._elem);
+
+            this._zIndexer = zIndexer;
+
+            // изменяем top/left
+            this._initRelocation();
+            // удаляем стикер
+            this._initRemove();
+            // инициализация поверх всех
+            this._initAtopState();
+
+            // при изм. текста/разера
+            this._watchSize();
+            this._watchText();
+
+            this._stock = new Stock(key, id);
+        }
+
+        create(w, h, x, y) {
+            this._setW(w);
+            this._setH(h);
+            this._setX(x);
+            this._setY(y);
+            this._setText('');
+            // при создании поверх всех
+            this._setMaxZ();
+        }
+
+        restore(data) {
+            this._setW(data.w);
+            this._setH(data.h);
+            this._setX(data.x);
+            this._setY(data.y);
+            this._setZ(data.z);
+
+            this._setText(data.text);
+        }
+
+        // сохр. в локал. хранилище
+        _save() {
+            let data = {
+                x: this._getX(),
+                y: this._getY(),
+                z: this.getZ(),
+                w: this._getW(),
+                h: this._getH(),
+                text: this._getText()
+            }
+            this._stock.save(data);
+        }
+
+        _setW(value) {
+            this._w = value;
+            this._elem.style.width = value + 'px';
+
+            this._save();
+        }
+
+        _getW() {
+            return this._w;
+        }
+
+        _setH(value) {
+            this._h = value;
+            this._elem.style.height = value + 'px';
+
+            this._save();
+        }
+
+        _getH() {
+            return this._h;
+        }
+
+        _setX(value) {
+            this._x = value;
+            this._elem.style.left = value + 'px';
+
+            this._save();
+        }
+
+        _getX() {
+            return this._x;
+        }
+
+        _setY(value) {
+            this._y = value;
+            this._elem.style.top = value + 'px';
+
+            this._save();
+        }
+
+        _getY() {
+            return this._y;
+        }
+
+        _setZ(value) {
+            this._z = value;
+            this._elem.style.zIndex = value;
+
+            this._save();
+        }
+
+        getZ() {
+            return this._z;
+        }
+
+        _setText(text) {
+            this._text = text;
+            this._elem.value = text;
+
+            this._save();
+        }
+
+        _getText() {
+            return this._text;
+        }
+
+        _setMaxZ() {
+            let maxZ = this._zIndexer.getMaxZ();
+
+            if( maxZ !== this.getZ() || maxZ === 0 ) {
+                this._setZ(maxZ + 1);
+            }
+        }
+
+        _watchSize() {
+            // 'resize'  с ивентами не работает
+            this._elem.addEventListener('mouseup', () => {
+                // при изменении размера в браузере(без методов)
+                let newW = parseInt(this._elem.style.width);
+                let newH = parseInt(this._elem.style.height);
+                // console.log(newW);
+                // console.log(this._getW())
+
+                // при изменении меняем
+                if( newW !== this._getW() ) this._setW(newW);
+                if( newH !== this._getH() ) this._setH(newH);
+            });
+        }
+
+        // изменяем текст при изменении
+        _watchText() {
+            this._elem.addEventListener('blur', () => {
+                let newText = this._elem.value;
+
+                if( newText !== this._getText() ) {
+                    this._setText(newText);
+                }
+            });
+        }
+
+        _initAtopState() {
+            this._elem.addEventListener('click', () => {
+                this._setMaxZ();
+            });
+            this._elem.addEventListener('dragstart', () => {
+                this._setMaxZ();
+            });
+        }
+
+        // удаляем на колесико
+        _initRemove() {
+            this._elem.addEventListener('mousedown', e => {
+                if( e.which == 2 ) {
+                    this._parent.removeChild(this._elem);
+                    e.preventDefault();
+                    // удаление из локалки
+                    this._stock.remove();
+                }
+            });
+        }
+
+        // DnD
+        _initRelocation() {
+            this._elem.draggable = true;
+
+            let correctionX = 0;
+            let correctionY = 0;
+            
+            //коорд. курсора относ. стикера
+            this._elem.addEventListener('dragstart', e => {
+                // место нахождения блока - место нах. курсора
+                correctionX = this._getX() - e.pageX;
+                correctionY = this._getY() - e.pageY;
+            });
+            // чтобы где взял курсором, там он и остался(не уходил в левый угол стикера)
+            this._elem.addEventListener('dragend', e => {
+                this._setX(e.pageX + correctionX);
+                this._setY(e.pageY + correctionY);
+                // при перетягивании фокус элемента при оконч. перетягивании теряется
+                this._elem.blur();
+            });
+        }
+    }
+
+    // выдает правильный z-index
+    class ZIndexer {
+        constructor() {
+            this._stikers = [];
+        }
+
+        add(stiker) {
+            this._stikers.push(stiker);
+        } 
+
+        getMaxZ() {
+            if( this._stikers.length !== 0 ) {
+                let zindexes = [];
+
+                this._stikers.forEach(stiker => {
+                    zindexes.push(stiker.getZ());
+                });
+
+                return Math.max.apply(null, zindexes);
+            } return 0;
+        }
+    }
+
+    // склад(work with JSON)
+    class Stock {
+        constructor(key, id = null) {
+            this._storage = new Storage(key);
+        }
+
+        save(value) {
+            let data = this._extract();
+            data[this._id] = value;
+            this._compact(data);
+        }
+
+        remove() {
+            let data = this._extract();
+            delete data[this._id];
+            this._compact(data);
+        }
+
+        get() {
+            let data = this._extract();
+            if( data[this._id] !== undefined ) {
+                return data[this._id];
+            }
+        }
+
+
+        getAll() {
+            return this._extract();
+        }
+
+        // сжать в джос
+        _compact(data) {
+            this._storage.save(JSON.stringify(data));
+        }
+
+        // расжать
+        _extract() {
+            let data = this._storage.get();
+
+            if( data === null ) {
+                return {};
+            } 
+            return JSON.parse(data);
+        }
+    }
+
+    // работает с локалстор.
+    class Storage {
+        constructor(key) {
+            this._key = key;
+        }
+
+        save(data) {
+            localStorage.setItem(this._key, data);
+        }
+
+        get() {
+            return localStorage.getItem(this._key);
+        }
+    }
+    
+    // localstorage - key stikers
+    const key = 'stikers';
+    const zIndexer = new ZIndexer;
+
+    let stock = new Stock(key);
+    let globalData = stock.getAll();
+
+    var id = 0;
+    for( id in globalData ) {
+        let stiker = new Stiker(document.body, key, id, zIndexer);
+        stiker.restore(globalData[id]);
+
+        // добавляем в коллекцию стикеров
+        zIndexer.add(stiker);
+    };
+
+    window.addEventListener('dblclick', e => {
+        id++;
+
+        let stiker = new Stiker(document.body, key, id, zIndexer);
+        stiker.create(150, 200, e.pageX, e.pageY);
+
+        zIndexer.add(stiker);
+    });
+    
+    </script>
+</body>
+</html>

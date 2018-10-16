@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="margin: 0">
+    <canvas id="canvas" style="display: block">Ваш браузер устарел, да и вы устарели тоже</canvas>
+
+    <script>
+    
+    let canv = document.getElementById('canvas'),
+        ctx = canv.getContext('2d'),
+        isMouseDown = false,
+        coords = [];
+
+    canv.width = window.innerWidth;
+    canv.height = window.innerHeight;
+    ctx.lineWidth = 10 * 2;
+    
+    canv.addEventListener('mousedown', function() {
+        isMouseDown = true;
+    })
+
+    canv.addEventListener('mouseup', function() {
+        isMouseDown = false;
+        ctx.beginPath();
+        coords.push('mouseup');
+    })
+    canv.addEventListener('mousemove', function(e) {
+        if(isMouseDown) {
+            coords.push([e.clientX, e.clientY]);
+            ctx.lineTo(e.clientX, e.clientY);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(e.clientX, e.clientY, 10, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(e.clientX, e.clientY);
+        }
+    });
+
+function replay() {
+    let timer = setInterval(function() {
+        if( !coords.length ) {
+            clearInterval(timer);
+            ctx.beginPath();
+            return;
+        }
+
+        let crd = coords.shift();
+        // имулируем переменную
+        let e = {
+            clientX: crd['0'],
+            clientY: crd['1']
+        };
+
+        ctx.lineTo(e.clientX, e.clientY);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(e.clientX, e.clientY, 10, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(e.clientX, e.clientY);
+    }, 30);
+}
+
+function save() {
+    localStorage.setItem('coords', JSON.stringify(coords));
+}
+
+function clear() {
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canv.width, canv.height);
+
+    ctx.beginPath();
+    ctx.fillStyle = 'black';
+}
+
+document.addEventListener('keydown', function(e) {
+
+    if(e.key.toLowerCase() == 's') {
+        // save
+        save();
+        console.log('Saved')
+    }
+
+    if(e.key.toLowerCase() == 'r') {
+        // replay
+        console.log('Replaying...');
+
+        coords = JSON.parse(localStorage.getItem('coords'));
+        clear();
+        replay();
+    }
+
+    if(e.key.toLowerCase() == 'c') {
+        // clear
+        clear();
+        console.log('Cleared');
+    }
+
+})
+
+
+
+
+    // code
+    // let x = 0;
+    
+    // ctx.fillRect(50, 50, 200, 200);
+
+    // увеличивает размер рисуемой фигуры(beginPath)
+    // ctx.scale(3, 2);
+    // поворот на 3 градуса влево
+    // ctx.rotate( 3 * Math.PI /180);
+
+    // setInterval(() => {
+        // закрашиваем в белый
+        // ctx.fillStyle = 'white';
+        // ctx.fillRect(0, 0, canv.width, canv.height);
+
+        // передвигаем
+        // ctx.fillStyle = 'black';
+        // ctx.fillRect(x++, 50, 200, 200);
+    // }, 10);
+
+    // круг
+    // ctx.arc(canv.width / 2, canv.height / 2, 100, 0, Math.PI);
+    // ctx.fill();
+
+    // треугольник
+    // ctx.beginPath();
+    // ctx.moveTo(50, 50);
+    // ctx.lineTo(25, 100);
+    // ctx.lineTo(100, 100);
+    // ctx.closePath();
+    // ctx.stroke();
+
+    // текст
+    // градиент
+    // let grad = ctx.createLinearGradient(0, 0, 500, 0);
+    // grad.addColorStop('0', 'magenta');
+    // grad.addColorStop('.50', 'blue');
+    // grad.addColorStop('1', 'red');
+
+    // ctx.fillStyle = grad;
+    // ctx.textAlign = 'center';
+    // ctx.font = '40px Georgia bold';
+    // ctx.fillText('Hello World', 50, 50);
+
+
+    
+    </script>
+</body>
+</html>

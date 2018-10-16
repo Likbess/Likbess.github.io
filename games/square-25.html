@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+
+</head>
+<body>
+
+	<p id="result">Начиная с "1" нажимайте на числа до тех пор, пока не дойдете до последнего</p>
+	<button id="start">Начать</button>
+	<button id="restartButton">Начать сначала</button>
+	<style>
+		
+		#game_table {
+			border: 1px solid #000;
+			margin: 0 auto;
+			border-radius: 2px;
+			user-select: none;
+		}
+		#start {
+			margin: 0 auto;
+			display: block;
+			position: relative;
+		}
+		#restartButton {
+			display: none;
+			margin: 20px auto;
+		}
+		td {
+			width: 50px;
+			height: 50px;
+			line-height: 30px;
+			font-weight: bold;
+			border: 1px solid #000;
+			text-align: center;
+			border-radius: 2px;
+			cursor: pointer;
+		}
+		.selected {
+			background: #c00;
+		}
+
+		#result {
+			text-align: center;
+		}
+
+	</style>
+	<script>
+	
+	let end = +prompt('Введите квадрат числа кол-ва колонок', '25');
+	let time = end * 3;
+	let lastArray = range(1, end);
+	let result = document.getElementById('result')
+	let ii = 1;
+	let but = document.getElementById('start')
+	let restartButton = document.getElementById('restartButton');
+	let table = document.createElement('table');
+	table.id = 'game_table';
+	let counter = 0;
+
+	but.addEventListener('click', start);
+	but.addEventListener('click', timer);
+
+	Array.prototype.min = function() {
+	  return Math.min.apply(null, this);
+	};
+
+
+
+	function range(from, to) {
+
+		let array = [];
+
+		for( let i = from; i <= to; i++ ) {
+			array.push(i);
+		}
+		return array;
+
+	}
+
+
+
+	function createTable(arr) {
+		let trs = Math.sqrt(arr.length);
+		for( let i = 0; i < trs; i++ ) {
+			let tr = document.createElement('tr');
+
+			for( let j = 0; j < trs; j++ ) {
+				let td = document.createElement('td');
+				td.innerHTML = arr[counter];
+				td.addEventListener('click', check);
+
+				td.style.color = getRandomColor();
+				td.style.fontSize = getRandomFontSize();
+				td.style.fontWeight = getRandomBold();
+				tr.appendChild(td);
+				counter++;
+			}
+			table.appendChild(tr);
+			but.style.marginBottom = '10%';
+		}
+		document.body.appendChild(table);
+	}
+
+
+	function shuffle(arr) {
+
+		let result = [];
+		let length = arr.length;
+
+		for( let i = 0; i < length; i++ ) {
+			let random = getRandomInt(0, arr.length - 1);
+			let elem = arr.splice(random, 1)[0];
+			result.push(elem);
+		}
+		return result;
+	}
+
+	function getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	function getRandomColor() {
+	  return 'rgb(' + getRandomInt(0, 255) + ',' + 
+		getRandomInt(0, 255) + ',' + getRandomInt(0, 255) + ')';
+	}
+
+	function getRandomFontSize() {
+		return getRandomInt(14, 40) + 'px';
+	}
+
+	function getRandomBold() {
+		return getRandomInt(100, 900);
+	}
+
+	function start() {
+		createTable(shuffle(lastArray));
+		but.style.display = 'none';
+		but.style.marginBottom = "0";
+		restartButton.style.display = 'block';
+		result.innerHTML = "Времени осталось: " + time;
+	}
+	let timerId = 0;
+
+	function timer() {
+
+		timerId = setInterval(function() {
+			time--;
+			result.innerHTML = "Времени осталось: " + time;
+			if( time == 0 ) {
+				clearInterval(timerId);
+				result.innerHTML = 'Вы проиграли';
+				ii = 0;
+			}
+
+		}, 1000);
+
+	}
+
+	function check() {
+		let num = Number(this.innerHTML);
+		console.log(ii);
+
+		if( num == ii ) {
+			this.classList.add('selected');
+			lastArray.splice(num, 1);
+			this.removeEventListener('click', check);
+			ii++;
+		}
+
+		if( ii == end + 1 )  {
+			result.innerHTML = 'Вы победили';
+			clearInterval(timerId);
+		}
+
+	}
+
+	restartButton.addEventListener('click', restart)
+
+	function restart() {
+
+		time = end * 3;
+		result.innerHTML = "Времени осталось: " + time;
+		let newArr = shuffle(range(1, end));
+		let cells = document.getElementsByTagName('td');
+
+
+		for( let i = 0; i < cells.length; i++ ) {
+			cells[i].classList.remove('selected');
+			cells[i].addEventListener('click', check);
+			cells[i].innerHTML = newArr[i];
+		}
+		timer();
+		ii = 1;
+	}
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+    
+        #game td {
+            width: 20px;
+            height: 20px;
+            border: 1px solid black;
+        }
+        
+        #game td.gamer1 {
+            background: green;;
+        }
+
+        #game td.gamer2 {
+            background: yellow;;
+        }
+
+        #game td.winner {
+            border: 1px solid red;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="game"></div>
+
+    <script>
+    
+    class Field {
+        constructor(selector, rowsNum, colsNum) { 
+            // закончена ли игра
+            this._gameEnd = false;
+
+            // селектор игрового поля
+            this._field = document.querySelector(selector);
+            this._colsNum = colsNum;
+            this._rowsNum = rowsNum;
+
+            // объекты в спомогательных классах
+            this._dots = new Dots;
+            this._html = new HTML;
+            this._queue = new Queue(['gamer1', 'gamer2']);
+
+            // создаем поле
+            this._html.createTable(this._field, this._rowsNum, this._colsNum);
+            this._run();
+        }
+
+        _run() {
+            this._field.addEventListener('click', () => { // this = _field
+                // делегирование
+                let cell = event.target.closest('td:not(.gamer)');
+
+                if(!this._gameEnd && cell) { // не работаем, если конец игры, или точка уже нажата
+
+                    // узнаем позицию с помощью отсчета прошлых ячеек
+                    let col = this._html.getPrevSiblingsNum(cell); // td
+                    let row = this._html.getPrevSiblingsNum(cell.parentElement); // tr
+
+                    // узнаем игрока из очереди
+                    let gamer = this._queue.getGamer();
+                    // создаем точку
+                    let dot = new Dot(gamer, cell, row, col, this._dots); // dots - один и тот же объект, на который ссылкаются все точки
+                    // добавили в объект точек
+                    this._dots.add(dot, row, col);
+                    // отображаем точку, что добавили
+                    console.log(dot);
+
+                    // при победе
+                    let winLine = this._checkWin(dot);
+                    if(winLine) this._win(winLine);
+                }
+            });
+        }
+
+        _win(winLine) {
+            this._gameEnd = true;
+            this._notifyWinnerCells(winLine);
+        }
+
+        // известить ячейки победителя, что они победили
+        _notifyWinnerCells(winLine) {
+            winLine.forEach(dot => {
+                dot.becomeWinner();
+            });
+        }
+
+        _checkWin(dot) {
+            // направления
+            let dirs = [
+                {deltaRow: 0, deltaCol: -1},
+                {deltaRow: -1, deltaCol: -1},
+                {deltaRow: -1, deltaCol: 0},
+                {deltaRow: -1, deltaCol: 1},
+
+            ];
+
+            for( let i = 0; i < dirs.length; i++ ) {
+                // принимает точку, проверяет по направлениям
+                let line = this._checkLine(dot, dirs[i].deltaRow, dirs[i].deltaCol);
+
+                // победа(больше 5 точек в линии)
+                if(line.length >= 5) return line;
+            }
+        }
+
+        _checkLine(dot, deltaRow, deltaCol) {
+            let dir1 = this._checkDir(dot, deltaRow, deltaCol);
+            // инвертируем направление
+            let dir2 = this._checkDir(dot, -deltaRow, -deltaCol);
+
+            // объединили, получили линию из одинаковых точек
+            return [].concat(dir1, [dot], dir2);
+        }
+
+        // dir - наравление
+        _checkDir(dot, deltaRow, deltaCol) { // массив объектов класса дот
+            let result = [];
+            let neighbor = dot;
+
+            while(1) {
+                neighbor = neighbor.getNeighbor(deltaRow, deltaCol);
+
+                if(neighbor) {
+                    result.push(neighbor); // пушим соседей, пока она есть
+                } else return result; // вернет соседей
+            }
+        }
+    }
+
+    class Dots {
+        constructor() {
+            // создаем объект точек по координатам
+            this._dots = {};
+        }
+        // объект класса дот, его ряд, колонка
+        add(dot, row, col) {
+            // если ряда нет - создаем
+            if(this._dots[row] === undefined) this._dots[row] = {};
+
+            this._dots[row][col] = dot;
+        }
+
+        get(row, col) {
+            // есть ли ряд\колонка?
+            if(this._dots[row] && this._dots[row][col]) {
+                return this._dots[row][col];
+            }
+            return undefined;
+        }
+    }
+
+    class Dot {
+        constructor(gamer, elem, row, col, dots) {
+            // X, O
+            this._gamer = gamer;
+            // ссылка на тдшку
+            this._elem = elem;
+            this._row = row;
+            this._col = col;
+            // объект с набором всех точек на игровом поле
+            this._dots = dots;
+
+            // хранит соседей
+            // схема хранения
+            //-1 ряд -1 0 1
+            // 0 ряд -1 0 1
+            // 1 ряд -1 0 1
+            this._neighbors = {}; // {-1: {1: Dot, 0: Dot}, 1: {0: Dot}}
+
+            // находит соседей
+            this._findNeighbors();
+            //
+            this._notifyNeghbors();
+            //
+            this._reflect();
+        }
+
+        getRow() {
+            return this._row;
+        }
+
+        getCol() {
+            return this._col;
+        }
+
+        becomeWinner() {
+            // красим границу точки в красный
+            this._elem.classList.add('winner');
+        }
+
+        getNeighbor(deltaRow, deltaCol) {
+            // получает соседа, дельта - смещение(-1 || 0 || 1)
+            if(this._neighbors[deltaRow] !== undefined) { // есть ли вообще row в котором col?
+                return this._neighbors[deltaRow][deltaCol]; // возврат ссылку на объект соседа
+            } 
+            return undefined
+
+        }
+        // добавляем соседа
+        // передаем объект
+        addNeighbor(neighbor) {
+            // вычисляем смещение
+            let deltaRow = neighbor.getRow() - this._row; // ряд соседа - наш ряд
+            let deltaCol = neighbor.getCol() - this._col;
+
+            // создаем ряд, если как такового нет
+            if(this._neighbors[deltaRow] === undefined) { // есть ли вообще row в котором col?
+                this._neighbors[deltaRow] = {};
+            } 
+
+            this._neighbors[deltaRow][deltaCol] = neighbor;
+        }
+
+        // ищит всех соседей вокруг точки
+        _findNeighbors() {
+            this._considerNeighbor(1, 1);
+            this._considerNeighbor(1, 0);
+            this._considerNeighbor(1, -1);
+            this._considerNeighbor(0, 1);
+            this._considerNeighbor(0, -1);
+            this._considerNeighbor(-1, 1);
+            this._considerNeighbor(-1, 0);
+            this._considerNeighbor(-1, -1);
+        }
+
+        // рассмотреть соседа
+        _considerNeighbor(deltaRow, deltaCol) {
+            let neighbor = this._dots.get(this._row + deltaRow, this._col + deltaCol);// текущее положение, добавляя -1\0\1
+            // belongs проверяет, свои ли точки
+            if( neighbor !== undefined && neighbor._belongsTo(this._gamer) ) {
+                this.addNeighbor(neighbor);
+            }
+        }
+
+        // извещает соседей про новую точку(соседа)
+        _notifyNeghbors() {
+            for(let rowKey in this._neighbors) { // ключ ряда смещения
+                for(let colKey in this._neighbors[rowKey]) { // по ключу перебираем эл-ты
+                    this._neighbors[rowKey][colKey].addNeighbor(this); // для каждого соседа вызываем(добавь новую точку)
+                }
+            }
+        }
+
+        // отразить(отображает изменения объекта на ДОМ)
+        _reflect() {
+            this._elem.classList.add('gamer');
+            this._elem.classList.add(this._gamer);
+        }
+
+        // принадлежит ли тому gamer'у, что проверяем
+        _belongsTo(gamer) {
+            return this._gamer == gamer;
+        }
+    }
+
+    class Queue { // очередь(по очереди выдавать gamer1/gamer2/...)
+        constructor(gamers) {
+            this._gamers = gamers;
+            this._counter = new Counter(this._gamers.length);
+        }
+
+        getGamer() {
+            return this._gamers[this._counter.get()];
+        }
+    }
+
+    // класс, что постоянно будет выводить числа
+    class Counter { // 3
+        constructor(length) {
+            this._length = length;
+            this._counter = null;
+        }
+
+        get() { // 0 1 2 0 1 2 ...
+            if(this._counter == null) this._counter = 0;
+            else { 
+                this._counter++;
+                if( this._counter == this._length ) this._counter = 0
+            }
+            return this._counter;
+        }
+    }
+
+    class HTML { // помогает с html
+
+        // игровое поле
+        createTable(parent, rowsNum, colsNum) {
+            let table = document.createElement('table');
+
+            for (let i = 0; i < rowsNum; i++) {
+                let tr = document.createElement('tr');
+
+                for (let j = 0; j < colsNum; j++) {
+                    let td = document.createElement('td');
+                    tr.appendChild(td);
+
+                    // по-легкому узнать расположение точки
+                    // td.dataset.row = i
+                    // td.dataset.col = j
+                }
+                table.appendChild(tr);
+            }
+            parent.appendChild(table);
+        }
+
+        // чтобы узнать сколько тдшек\трок до самого элемента(тким образом узнаем позицию точки)
+        getPrevSiblingsNum(elem) {
+            let prev = elem.previousSibling;
+            let i = 0;
+
+            while(prev) {
+                prev = prev.previousSibling;
+                i++
+            }
+
+            return i;
+        }
+    }
+
+    new Field('#game', 50, 50)
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #canvas {
+        display: block;
+        border: 3px solid black;
+        margin: 20px;
+    }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"> Ваш браузер устарел </canvas>
+    <p>Кол-во циклов: <span id="count">0</span></p>
+    <button id="start"> Старт </button>
+    <script>
+    
+    let canv = document.getElementById('canvas'),
+        ctx = canv.getContext('2d'),
+        size = 600,
+        pSize = size / 10,
+        arr = [],
+        count = 0,
+        timer;
+
+    canv.width = size;
+    canv.height = size;
+
+    goLife();
+
+    // создаем двухмерный массив
+    function goLife() {
+        let a = pSize, b = pSize;
+        for( let i = 0; i < a; i++ ) {
+            arr[i] = [];
+            for( let j = 0; j < b; j++ ) {
+                arr[i][j] = 0;
+            }
+        }
+    }
+
+    // получаем координату клика, ставим 1 в поле нулей
+    canv.addEventListener('click', (e) => {
+        const x = Math.floor(e.offsetX / 10);
+        const y = Math.floor(e.offsetY / 10);
+
+        arr[y][x] = 1;
+        drawField();
+    });
+
+    function drawField() {
+        ctx.clearRect(0, 0, canv.width, canv.height);
+        for( let i = 0; i < pSize; i++ ) {
+
+            for( let j = 0; j < pSize; j++ ) {
+
+                if( arr[i][j] == 1 ) {
+                    ctx.fillRect(j * 10, i * 10, 10, 10);
+                }
+
+            }
+
+        }
+    }
+
+    function startLife() {
+        // моделирование жизни
+        let arr2 = [];
+
+        for( let i = 0; i < pSize; i++ ) {
+            arr2[i] = [];
+            for( let j = 0; j < pSize; j++ ) {
+                let neighbors = 0;
+                // стороны
+                if( arr[fpm(i) - 1][j] == 1 ) neighbors++; // вверх
+                if( arr[fpp(i) + 1][j] == 1 ) neighbors++; // вниз 
+                if( arr[i][fpp(j) + 1] == 1 ) neighbors++; // вправо
+                if( arr[i][fpm(j) - 1] == 1 ) neighbors++; // влево
+                // диагонали
+                if( arr[fpm(i) - 1][fpm(j) - 1] == 1 ) neighbors++; // вниз влево
+                if( arr[fpp(i) + 1][fpp(j) + 1] == 1 ) neighbors++; // вверх вправо
+                if( arr[fpm(i) - 1][fpp(j) + 1] == 1 ) neighbors++; // вниз вправо
+                if( arr[fpp(i) + 1][fpm(j) - 1] == 1 ) neighbors++; // вверх влево
+
+                // живет ли клетка(зависит от соседей)
+                (neighbors == 2 || neighbors == 3) ? arr2[i][j] = 1 : arr2[i][j] == 0;
+            }
+        }
+        arr = arr2;
+        drawField();
+        count++;
+        document.getElementById('count').innerHTML = count;
+        timer = setTimeout(startLife, 300);
+    }
+
+    // выход за пределы (уход в минус)
+    function fpm(i) {
+        if( i == 0 ) return pSize;
+        return i;
+    }
+
+    // выход за пределы (уход в > pSize)
+    function fpp(j) {
+        if( j == (pSize - 1) ) return 0;
+        return j;
+    }
+
+    document.getElementById('start').onclick = startLife;
+    
+    </script>
+</body>
+</html>

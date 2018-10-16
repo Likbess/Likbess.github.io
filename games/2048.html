@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+
+html, body {
+  margin: 0;
+  padding: 0;
+
+  background: #faf8ef;
+  color: rgb(83, 56, 28);
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+}
+
+  table {
+    margin: 0 auto;
+    background-color: #BBADA0;
+    padding: 15px;
+    border-radius: 5px;
+    width: 40vw;
+    height: 80vh;
+  }
+  
+  td {
+    text-align: center;
+    border-radius: 3px;
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  td[data-score='0'] {
+    background-color: #CDC1B4;
+  }
+
+  td[data-score='2'] {
+    background-color: #EEE4DA;
+  }
+
+  td[data-score='4'] {
+    background-color: #EEE1C9;
+  }
+
+  td[data-score='8'] {
+    background-color: #F3B27A;
+  }
+
+  td[data-score='16'] {
+    background-color: #F69664;
+  }
+
+  td[data-score='32'] {
+    background-color: #F77C5F;
+  }
+
+  td[data-score='64'] {
+    background-color: #F75F3B;
+  }
+
+  td[data-score='128'] {
+    background-color: #F4D86D;
+    font-size: 1.8rem;
+  }
+
+  td[data-score='256'] {
+    background-color: #F2D04B;
+    box-shadow: 0px 0px 25px 2px rgba(240,214,128,1);
+    font-size: 1.8rem;
+  }
+
+  td[data-score='512'] {
+    background-color: #E4C02A;
+    box-shadow: 0px 0px 25px 4px rgba(240,214,128,1);
+    font-size: 1.8rem;
+  }
+
+  td[data-score='1024'] {
+    background-color: #E3BA14;
+    box-shadow: 0px 0px 25px 6px rgba(240,214,128,1);
+    font-size: 1.5rem;
+  }
+
+  td[data-score='2048'] {
+    background-color: #ECC400;
+    box-shadow: 0px 0px 25px 10px rgba(240,214,128,1);
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 600px) {
+      table {
+      width: 80vw;
+      height: 50vh;
+    }
+  }
+
+  @media (max-width: 400px) {
+      table {
+      width: 320px;
+      height: 320px;
+    }
+  }
+
+  </style>
+</head>
+<body>
+    <p>Очков: <span class="score">0</span></p> 
+    <p class="result"></p>
+    <table id="field" cellspacing="20px"></table>
+
+
+    <script>
+    
+      class Game {
+        constructor(size) {
+
+          this.sizeOfTable = size;
+          this._fieldParent = document.getElementById('field');
+
+          this._createTable();
+
+          this._addValue = new addValue(this._cells);
+          this._moveCells = new moveCells(this.sizeOfTable);
+        }
+
+        _createTable() {
+          for( let i = 0; i < this.sizeOfTable; i++ ) {
+            let tr = document.createElement('tr');
+
+            for( let j = 0; j < this.sizeOfTable; j++ ) {
+              let td = document.createElement('td');
+              td.dataset.row = j;
+              td.dataset.col = i;
+              td.dataset.score = '0';
+              tr.appendChild(td);
+            }
+
+            this._fieldParent.appendChild(tr);
+          }
+        }
+      }
+
+      class moveCells {
+        constructor(sizeOfTable) {
+
+          this.sizeOfTable = sizeOfTable;
+
+          this._addEvents();
+
+          this._addValue = new addValue();
+        }
+
+        _upCells() {
+          let count = 0;
+          while( count < this.sizeOfTable ) {
+
+            for( let i = 0; i < this.sizeOfTable - 1; i++ ) {
+
+              for( let j = 0; j < this.sizeOfTable; j++ ) {
+
+                let currentCell = document.querySelector(`td[data-col='${i}'][data-row='${j}']`);
+                let upperCell = document.querySelector(`td[data-col='${i + 1}'][data-row='${j}']`);
+
+                this._countValues(currentCell, upperCell);
+
+              }
+            }
+            count++;
+          }
+          this._addValue._addValue();
+        }
+
+        _downCells() {
+          let count = 0;
+          while( count < this.sizeOfTable ) {
+
+            for( let i = this.sizeOfTable - 1; i > 0; i-- ) {
+
+              for( let j = this.sizeOfTable - 1; j > -1; j-- ) {
+
+                let currentCell = document.querySelector(`td[data-col='${i}'][data-row='${j}']`);
+                let downCell = document.querySelector(`td[data-col='${i - 1}'][data-row='${j}']`);
+
+                this._countValues(currentCell, downCell);
+
+              }
+            }
+            count++;
+          }
+          this._addValue._addValue();
+        }
+
+        _rightCells() {
+          let count = 0;
+          while( count < this.sizeOfTable ) {
+
+            for( let i = 0; i < this.sizeOfTable; i++ ) {
+
+              for( let j = this.sizeOfTable - 1; j > 0; j-- ) {
+
+                let currentCell = document.querySelector(`td[data-col='${i}'][data-row='${j}']`);
+                let rightCell = document.querySelector(`td[data-col='${i}'][data-row='${j - 1}']`);
+
+                this._countValues(currentCell, rightCell);
+
+              }
+            }
+            count++;
+          }
+          this._addValue._addValue();
+        }
+
+        _leftCells() {
+          let count = 0;
+          while( count < this.sizeOfTable ) {
+
+            for( let i = 0; i < this.sizeOfTable; i++ ) {
+
+              for( let j = 0; j < this.sizeOfTable - 1; j++ ) {
+
+                let currentCell = document.querySelector(`td[data-col='${i}'][data-row='${j}']`);
+                let leftCell = document.querySelector(`td[data-col='${i}'][data-row='${j + 1}']`);
+
+                this._countValues(currentCell, leftCell);
+
+              }
+            }
+            count++;
+          }
+          this._addValue._addValue();
+        }
+
+        _addEvents() {
+          window.addEventListener('keydown', e => {
+
+          if(e.keyCode == 37) // left arrow
+            this._leftCells();
+
+          if(e.keyCode == 38) // top arrow
+            this._upCells();
+
+          if(e.keyCode == 39) // right arrow
+            this._rightCells()
+
+          if(e.keyCode == 40) // down arrow
+            this._downCells();
+
+          });
+        }
+
+        _countValues(firstCell, secondCell) {
+          if( firstCell.dataset.score != 0 ) {
+
+            if( firstCell.dataset.score == secondCell.dataset.score ) {
+              firstCell.innerHTML = +firstCell.innerHTML + +secondCell.innerHTML;
+              firstCell.dataset.score = +firstCell.dataset.score + +secondCell.dataset.score;
+              secondCell.innerHTML = '';
+              secondCell.dataset.score = 0;
+            }
+            return;
+          }
+
+          [firstCell.innerHTML, secondCell.innerHTML] = [secondCell.innerHTML, ''];
+          [firstCell.dataset.score, secondCell.dataset.score] = [secondCell.dataset.score, 0];
+        }
+      }
+
+      class addValue {
+        constructor() {
+          this._cells = document.querySelectorAll('td');
+          this._addValue();
+        }
+
+        _addValue() {
+          let value = this._getRandomValue();
+          let freeTds = [];
+
+          this._cells.forEach((elem, index) => {
+            if( elem.dataset.score == 0 ) freeTds.unshift(elem);
+          });
+
+          let randomFreeTd = this._getRandomTd(freeTds);
+          
+          if(this._checkWin(freeTds)) return;
+          randomFreeTd.innerHTML = value;
+          randomFreeTd.dataset.score = value;
+        }
+
+        _getRandomTd(arr) {
+          return arr[Math.floor(Math.random() * (arr.length))];
+        }
+
+        _getRandomValue(min, max) {
+          if(Math.random() * 1000 > 600 ) return 4;
+          return 2;
+        }
+
+
+        _checkWin(arr) {
+          if( arr.length == 0 ) result.innerHTML = 'Ну ты и лох, братан, начинай сначала';
+          else return false;
+          window.removeEventListener('keydown', e => {
+
+          if(e.keyCode == 37 || Hammer.DIRECTION_LEFT) // left arrow
+            this._leftCells();
+
+          if(e.keyCode == 38 || Hammer.DIRECTION_UP) // top arrow
+            this._upCells();
+
+          if(e.keyCode == 39 || Hammer.DIRECTION_LEFT) // right arrow
+            this._rightCells()
+
+          if(e.keyCode == 40 || Hammer.DIRECTION_DOWN) // down arrow
+            this._downCells();
+
+          });
+          return true;
+        }
+      }
+
+      let table = document.getElementById('field');
+      let size = prompt('Какой размер поля? (если 4x4, то просто указать 4)', '4');
+      let result = document.querySelector('p.result');
+
+      let game = new Game(size);
+
+
+
+    </script>
+</body>
+</html>
