@@ -262,7 +262,8 @@ html, body {
             this._upCells();
           });
 
-          window.addEventListener('swiped-down', () => {
+          window.addEventListener('swiped-down', (e) => {
+            e.preventDefault();
             this._downCells();
           });
 
