@@ -257,6 +257,46 @@ html, body {
           });
         }
 
+        _addSwipes() {
+          const initialPoint;
+          const finalPoint;
+          document.addEventListener('touchstart', function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          initialPoint=event.changedTouches[0];
+          }, false);
+          document.addEventListener('touchend', function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          finalPoint = event.changedTouches[0];
+            var xAbs = Math.abs(initialPoint.pageX - finalPoint.pageX);
+            var yAbs = Math.abs(initialPoint.pageY - finalPoint.pageY);
+
+            if (xAbs > 20 || yAbs > 20) {
+              if (xAbs > yAbs) {
+                if (finalPoint.pageX < initialPoint.pageX){
+                  // swipe left
+                  this._leftCells();
+                }
+                else{
+                  // swipe right
+                  this._rightCells();
+                }
+              }
+              else {
+                if (finalPoint.pageY < initialPoint.pageY){
+                  // swipe up
+                  this._upCells()
+                }
+                else{
+                  // swipe down
+                  this._downCells()
+                }
+              }
+            }
+          }, false);
+        }
+
         _countValues(firstCell, secondCell) {
           if( firstCell.dataset.score != 0 ) {
 
@@ -326,43 +366,6 @@ html, body {
           return true;
         }
       }
-
-var initialPoint;
-var finalPoint;
-document.addEventListener('touchstart', function(event) {
-event.preventDefault();
-event.stopPropagation();
-initialPoint=event.changedTouches[0];
-}, false);
-document.addEventListener('touchend', function(event) {
-event.preventDefault();
-event.stopPropagation();
-finalPoint=event.changedTouches[0];
-var xAbs = Math.abs(initialPoint.pageX - finalPoint.pageX);
-var yAbs = Math.abs(initialPoint.pageY - finalPoint.pageY);
-if (xAbs > 20 || yAbs > 20) {
-if (xAbs > yAbs) {
-if (finalPoint.pageX < initialPoint.pageX){
-/*СВАЙП ВЛЕВО*/
-  alert('swipe left')
-}
-else{
-/*СВАЙП ВПРАВО*/
-alert('swipe right')
-}
-}
-else {
-if (finalPoint.pageY < initialPoint.pageY){
-/*СВАЙП ВВЕРХ*/
-alert('swipe up')
-}
-else{
-/*СВАЙП ВНИЗ*/
-alert('swipe down')
-}
-}
-}
-}, false);
 
       let table = document.getElementById('field');
       let size = prompt('Какой размер поля? (если 4x4, то просто указать 4)', '4');
