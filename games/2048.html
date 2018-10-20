@@ -192,6 +192,34 @@ html, body {
     font-size: 1.8rem;
   }
 
+  .game-over {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(238, 228, 218, 0.5);
+    z-index: 100;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game-over p {
+    font-size: 60px;
+    margin-bottom: 50px;
+  }
+
+  .fade-in {
+    -webkit-animation: fade-in 800ms ease 1200ms;
+    -moz-animation: fade-in 800ms ease 1200ms;
+    animation: fade-in 800ms ease 1200ms;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+
   .score-addition {
     position: absolute;
     right: 30px;
@@ -252,7 +280,18 @@ html, body {
   100% {
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
-    transform: scale(1); } }
+    transform: scale(1); } 
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
 
   @media (max-width: 600px) {
     html, body {
@@ -335,6 +374,10 @@ html, body {
       </div>
       <button class="newGame">New Game</button>  
     </div>
+    <div class="game-over">
+      <p>Game over, братан</p>
+      <button class="newGame">New Game</button>
+    </div>
      
 
     </header>
@@ -355,8 +398,8 @@ html, body {
           this._addValue = new addValue(this._cells);
           this._moveCells = new moveCells(this.sizeOfTable);
 
-          let btn = document.querySelector('.newGame');
-          btn.addEventListener('click', () => this._newGame());
+          let btn = document.querySelectorAll('.newGame');
+          btn.forEach(elem => elem.addEventListener('click', () => this._newGame()));
         }
 
         _createTable() {
@@ -376,12 +419,20 @@ html, body {
         }
 
         _newGame() {
-          this._fieldParent.innerHTML = '';
-          totalScore.innerHTML = 0;
-          this._createTable();
+
+          this._cells = document.querySelectorAll('td');
+          this._cells.forEach( elem => {
+            elem.innerHTML = '';
+            elem.dataset.score = 0;
+          });
+          this._addValue._addValue();
+          this._addValue._addValue();
           
-          this._addValue = new addValue(this._cells);
-          this._moveCells = new moveCells(this.sizeOfTable);
+          totalScore.innerHTML = 0;
+
+          overlay.style.cssText = 'display: none;';
+          overlay.classList.remove('fade-in');
+
         }
       }
 
@@ -587,7 +638,7 @@ html, body {
           });
 
           let randomFreeTd = this._getRandomTd(freeTds);
-          
+          console.log(freeTds);
           if(this._checkWin(freeTds)) return;
           randomFreeTd.innerHTML = value;
           randomFreeTd.dataset.score = value;
@@ -610,31 +661,35 @@ html, body {
 
 
         _checkWin(arr) {
-          if( arr.length == 0 ) result.innerHTML = 'Ну ты и лох, братан, начинай сначала';
-          else return false;
+          if( arr.length != 0 ) return false;
+
+            this._removeEvents();
+            overlay.style.cssText = 'display: flex';
+            overlay.classList.add('fade-in');
+
+            return true;
+        }
+
+        _removeEvents() {
           window.removeEventListener('keydown', e => {
+            if(e.keyCode == 37) // left arrow
+              this._leftCells();
 
-          if(e.keyCode == 37) // left arrow
-            this._leftCells();
+            if(e.keyCode == 38) // top arrow
+              this._upCells();
 
-          if(e.keyCode == 38) // top arrow
-            this._upCells();
+            if(e.keyCode == 39) // right arrow
+              this._rightCells()
 
-          if(e.keyCode == 39) // right arrow
-            this._rightCells()
-
-          if(e.keyCode == 40) // down arrow
-            this._downCells();
-
+            if(e.keyCode == 40) // down arrow
+              this._downCells();
           });
 
           window.removeEventListener('swiped-up', () => {
             this._upCells();
           });
 
-          window.removeEventListener('swiped-down', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
+          window.removeEventListener('swiped-down', () => {
             this._downCells();
           });
 
@@ -645,8 +700,6 @@ html, body {
           window.removeEventListener('swiped-right', () => {
             this._rightCells();
           });
-
-          return true;
         }
       }
 
@@ -654,6 +707,7 @@ html, body {
       let size = prompt('Какой размер поля? (если 4x4, то просто указать 4)', '4');
       let totalScore = document.querySelector('.score');
       let bestScore = document.querySelector('.best');
+      let overlay = document.querySelector('.game-over');
       bestScore.innerHTML = localStorage['localBestScore'];
 
       let game = new Game(size);
