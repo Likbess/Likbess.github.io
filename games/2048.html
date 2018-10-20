@@ -192,7 +192,7 @@ html, body {
     font-size: 1.8rem;
   }
 
-  .game-over {
+  .game-over, .game-win {
     display: none;
     position: absolute;
     top: 0;
@@ -201,12 +201,18 @@ html, body {
     left: 0;
     background: rgba(238, 228, 218, 0.5);
     z-index: 100;
+    text-align: center;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    color: #f9f6f2;
   }
 
-  .game-over p {
+  .game-win {
+    background: rgba(237, 194, 46, 0.5);
+  }
+
+  .game-over p, .game-win p {
     font-size: 60px;
     margin-bottom: 50px;
   }
@@ -378,6 +384,10 @@ html, body {
       <p>Game over, братан</p>
       <button class="newGame">New Game</button>
     </div>
+    <div class="game-win">
+      <p>This is победа, братан</p>
+      <button class="newGame">New Game</button>
+    </div>
      
 
     </header>
@@ -430,8 +440,11 @@ html, body {
           
           totalScore.innerHTML = 0;
 
-          overlay.style.cssText = 'display: none;';
-          overlay.classList.remove('fade-in');
+          overlayOver.style.cssText = 'display: none;';
+          overlayOver.classList.remove('fade-in');
+
+          overlayWin.style.cssText = 'display: none;';
+          overlayWin.classList.remove('fade-in');
 
         }
       }
@@ -633,21 +646,23 @@ html, body {
           let value = this._getRandomValue();
           let freeTds = [];
 
-          this._cells.forEach((elem, index) => {
-            if( elem.dataset.score == 0 ) freeTds.unshift(elem);
+          this._cells.forEach((tile, index) => {
+            if( tile.dataset.score == 0 ) freeTds.unshift(tile);
+            if( tile.dataset.score == 2048 ) this._getWin();
           });
 
           let randomFreeTd = this._getRandomTd(freeTds);
-          console.log(freeTds);
-          if(this._checkWin(freeTds)) return;
+
+
+          if(this._checkGameOver(freeTds)) return;
           randomFreeTd.innerHTML = value;
           randomFreeTd.dataset.score = value;
           this._addClass(randomFreeTd, 'appear');
         }
 
-        _addClass(elem, cl) {
-          elem.classList.add(cl);
-          setTimeout(() => elem.classList.remove(cl), 1000);
+        _addClass(tile, cl) {
+          tile.classList.add(cl);
+          setTimeout(() => tile.classList.remove(cl), 1000);
         }
 
         _getRandomTd(arr) {
@@ -660,14 +675,21 @@ html, body {
         }
 
 
-        _checkWin(arr) {
+        _checkGameOver(arr) {
           if( arr.length != 0 ) return false;
 
             this._removeEvents();
-            overlay.style.cssText = 'display: flex';
-            overlay.classList.add('fade-in');
+            overlayWin.style.cssText = 'display: flex';
+            overlayWin.classList.add('fade-in');
 
             return true;
+        }
+
+        _getWin() {
+
+          overlayWin.style.cssText = 'display: flex';
+          overlayWin.classList.add('fade-in');
+
         }
 
         _removeEvents() {
@@ -707,7 +729,8 @@ html, body {
       let size = prompt('Какой размер поля? (если 4x4, то просто указать 4)', '4');
       let totalScore = document.querySelector('.score');
       let bestScore = document.querySelector('.best');
-      let overlay = document.querySelector('.game-over');
+      let overlayOver = document.querySelector('.game-over');
+      let overlayWin = document.querySelector('.game-win');
       bestScore.innerHTML = localStorage['localBestScore'];
 
       let game = new Game(size);
