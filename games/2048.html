@@ -10,11 +10,12 @@
 html, body {
   margin: 0;
   padding: 0;
-
+  overflow:hidden;
   background: #faf8ef;
   color: rgb(83, 56, 28);
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 18px;
+  user-select: none;
 }
 
   table {
@@ -37,12 +38,20 @@ html, body {
     text-align: center;
   }
 
+  td {
+    transition: all .1s ease-in-out;
+    /* animation: pop 200ms ease 100ms;
+    animation: appear 200ms ease 100ms;
+    animation-fill-mode: backwards; */
+  }
+
   td[data-score='0'] {
     background-color: #CDC1B4;
   }
 
   td[data-score='2'] {
-    background-color: #EEE4DA;
+    background-color: #EEE4DA; 
+    animation-fill-mode: backwards;
   }
 
   td[data-score='4'] {
@@ -93,6 +102,46 @@ html, body {
     box-shadow: 0px 0px 25px 10px rgba(240,214,128,1);
     font-size: 1.5rem;
   }
+
+  .pop {
+    animation: pop 200ms ease 100ms;
+    animation-fill-mode: backwards;
+  }
+
+  .appear {
+    animation: appear 200ms ease 100ms;
+    animation-fill-mode: backwards;
+  }
+
+  @keyframes appear {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    transform: scale(0); }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    transform: scale(1); } }
+
+
+@keyframes pop {
+  0% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    transform: scale(0); }
+
+  50% {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    transform: scale(1.2); }
+
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    transform: scale(1); } }
 
   @media (max-width: 600px) {
       table {
@@ -282,6 +331,8 @@ html, body {
             if( firstCell.dataset.score == secondCell.dataset.score ) {
               firstCell.innerHTML = +firstCell.innerHTML + +secondCell.innerHTML;
               firstCell.dataset.score = +firstCell.dataset.score + +secondCell.dataset.score;
+              this._addValue._addClass(firstCell, 'pop');
+
               secondCell.innerHTML = '';
               secondCell.dataset.score = 0;
             }
@@ -312,6 +363,12 @@ html, body {
           if(this._checkWin(freeTds)) return;
           randomFreeTd.innerHTML = value;
           randomFreeTd.dataset.score = value;
+          this._addClass(randomFreeTd, 'appear');
+        }
+
+        _addClass(elem, cl) {
+          elem.classList.add(cl);
+          setTimeout(() => elem.classList.remove(cl), 1000);
         }
 
         _getRandomTd(arr) {
@@ -349,6 +406,7 @@ html, body {
 
           window.removeEventListener('swiped-down', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             this._downCells();
           });
 
@@ -369,7 +427,6 @@ html, body {
       let result = document.querySelector('p.result');
 
       let game = new Game(size);
-
 
       // add swipes
       /*!
