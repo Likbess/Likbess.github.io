@@ -21,7 +21,7 @@ html, body {
   table {
     margin: 0 auto;
     background-color: #BBADA0;
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
     width: auto;
     position: relative;
@@ -32,9 +32,9 @@ html, body {
   td {
     text-align: center;
     border-radius: 3px;
-    width: 80px;
-    height: 80px;
-    font-size: 2rem;
+    width: 140px;
+    height: 140px;
+    font-size: 4rem;
   }
 
   .text {
@@ -44,21 +44,28 @@ html, body {
   p {
     text-align: center;
     margin: 5px 0;
-    font-size: 17px;
+    font-size: 1.5rem;
     color: #776E65;
   }
 
   h2 {
     margin: 10px 0;
-    font-size: 18px;
+    font-size: 1.5rem;
     color: #776E65;
+  }
+
+  h1 {
+    font-size: 6rem;
+    line-height: 10px;
+    color: #776E65;
+    margin-right: 140px;
   }
 
   .newGame {
     color: #fff;
     background-color: #8F7A66;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 1.2rem;
     padding: 10px 7px;
     border-radius: 5px;
     border: none;
@@ -105,35 +112,35 @@ html, body {
   td[data-score='128'] {
     color: #F9F6F2;
     background-color: #F4D86D;
-    font-size: 1.8rem;
+    font-size: 3.5rem;
   }
 
   td[data-score='256'] {
     background-color: #F2D04B;
     color: #F9F6F2;
     box-shadow: 0px 0px 25px 2px rgba(240,214,128,1);
-    font-size: 1.8rem;
+    font-size: 3.5rem;
   }
 
   td[data-score='512'] {
     background-color: #E4C02A;
     color: #F9F6F2;
     box-shadow: 0px 0px 25px 4px rgba(240,214,128,1);
-    font-size: 1.8rem;
+    font-size: 3.5rem;
   }
 
   td[data-score='1024'] {
     background-color: #E3BA14;
     color: #F9F6F2;
     box-shadow: 0px 0px 25px 6px rgba(240,214,128,1);
-    font-size: 1.5rem;
+    font-size: 3.5rem;
   }
 
   td[data-score='2048'] {
     background-color: #ECC400;
     color: #F9F6F2;
     box-shadow: 0px 0px 25px 10px rgba(240,214,128,1);
-    font-size: 1.5rem;
+    font-size: 3.5rem;
   }
 
   .pop {
@@ -169,7 +176,7 @@ html, body {
     width: 110px;
     margin: 5px;
     padding: 5px;
-    font-size: 16px;
+    font-size: 1rem;
 
     font-weight: bold;
     color: #EEE4DA;
@@ -182,14 +189,7 @@ html, body {
 
   .score, .best {
     color: #fff;
-    font-size: 25px;
-  }
-
-  h1 {
-    font-size: 74px;
-    line-height: 10px;
-    color: #776E65;
-    margin-right: 20px;
+    font-size: 1.8rem;
   }
 
   .score-addition {
@@ -255,18 +255,38 @@ html, body {
     transform: scale(1); } }
 
   @media (max-width: 600px) {
-      table {
-        padding: 10px;
+    html, body {
+      font-size: 12px;
     }
+
     td {
       width: 60px;
       height: 60px;
+      font-size: 2rem;
+      font-weight: normal;
     }
-  }
+    h1 {
+      margin-right: 40px;
+      font-size: 4rem;
+    }
 
-  @media (max-width: 400px) {
-      table {
-        padding: 5px;
+    .score, .best {
+      font-size: 1.4rem;
+    }
+
+    .total-score, .best-score {
+      width: 80px;
+      height: 40px;
+    }
+
+    .newGame {
+      margin-right: 30px;
+    }
+
+    h2, p {
+      font-size: 1.2rem;
+      text-align: left;
+      margin-left: 30px;
     }
   }
 
@@ -304,7 +324,7 @@ html, body {
 
     </header>
     
-    <table id="field" cellspacing="15px"></table>
+    <table id="field" cellspacing="10px"></table>
 
 
     <script>
@@ -319,6 +339,9 @@ html, body {
 
           this._addValue = new addValue(this._cells);
           this._moveCells = new moveCells(this.sizeOfTable);
+
+          let btn = document.querySelector('.newGame');
+          btn.addEventListener('click', () => this._newGame());
         }
 
         _createTable() {
@@ -336,6 +359,15 @@ html, body {
             this._fieldParent.appendChild(tr);
           }
         }
+
+        _newGame() {
+          this._fieldParent.innerHTML = '';
+          totalScore.innerHTML = 0;
+          this._createTable();
+          
+          this._addValue = new addValue(this._cells);
+          this._moveCells = new moveCells(this.sizeOfTable);
+        }
       }
 
       class moveCells {
@@ -346,7 +378,6 @@ html, body {
 
           this._addEvents();
           
-
           this._addValue = new addValue();
         }
 
