@@ -727,15 +727,15 @@ html, body {
         }
       }
 
-      let table = document.getElementById('field');
-      let size = prompt('Какой размер поля? (если 4x4, то просто указать 4)', '4');
-      let totalScore = document.querySelector('.score');
-      let bestScore = document.querySelector('.best');
-      let overlayOver = document.querySelector('.game-over');
-      let overlayWin = document.querySelector('.game-win');
+      const table = document.getElementById('field');
+      const size = 4;
+      const totalScore = document.querySelector('.score');
+      const bestScore = document.querySelector('.best');
+      const overlayOver = document.querySelector('.game-over');
+      const overlayWin = document.querySelector('.game-win');
       bestScore.innerHTML = localStorage['localBestScore'];
 
-      let game = new Game(size);
+      const game = new Game(size);
 
       // add swipes
       /*!
