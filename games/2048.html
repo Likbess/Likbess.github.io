@@ -398,6 +398,8 @@ html, body {
 
 
     <script>
+
+      localStorage['localBestScore'] = '0';
     
       class Game {
         constructor(size) {
@@ -688,10 +690,8 @@ html, body {
         }
 
         _getWin() {
-
           overlayWin.style.cssText = 'display: flex';
           overlayWin.classList.add('fade-in');
-
         }
 
         _removeEvents() {
@@ -733,7 +733,7 @@ html, body {
       const bestScore = document.querySelector('.best');
       const overlayOver = document.querySelector('.game-over');
       const overlayWin = document.querySelector('.game-win');
-      bestScore.innerHTML = localStorage['localBestScore'];
+            bestScore.innerHTML = localStorage['localBestScore'];
 
       const game = new Game(size);
 
