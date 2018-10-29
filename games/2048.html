@@ -399,7 +399,8 @@ html, body {
 
     <script>
 
-      localStorage['localBestScore'] = '0';
+      if(localStorage['localBestScore'] == undefined)
+        localStorage['localBestScore'] = '0';
     
       class Game {
         constructor(size) {
