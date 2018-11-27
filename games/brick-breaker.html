@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <style>
+    
+    body { 
+      background: rgb(50, 50, 50); 
+    }
+
+    canvas { 
+      background: rgb(18, 18, 18); 
+      display: flex; 
+      margin: 50px auto;
+    }
+
+    .game-over-notify, .new-level {
+      position: fixed;
+      display: none;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.5);
+      align-items: center;
+      justify-content: center;
+      font-family: sans-serif;
+      font-size: 40px;
+      font-weight: bold;
+      color: red;
+    }
+
+    .new-level {
+      color: rgb(255, 217, 0);
+    }
+    
+    </style>
+
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <canvas id="myCanvas"></canvas>
+    <div class="game-over-notify">Game Over</div>
+    <div class="new-level"></div>
+
+    <script>
+
+    var canvas = document.getElementById("myCanvas");
+    canvas.width = screen.width - ( screen.width * 0.2 );
+    canvas.height = screen.height - ( screen.height * 0.3);
+
+    var ctx = canvas.getContext("2d");
+    var lives = 3;
+    var round = 1;
+    var minValue = 1;
+
+    var ballRadius = 10;
+    var x = canvas.width/2;
+    var y = canvas.height - 62;
+    var dx = 2;
+    var dy = -2;
+
+    var paddleHeight = 10;
+    var paddleWidth = 75;
+    var paddleX = ( canvas.width - paddleWidth ) / 2;
+    var paddleY = canvas.height - (paddleHeight * 5);
+
+    var rightPressed = false;
+    var leftPressed = false;
+
+    var brickRowCount = Math.floor((screen.width * 0.9) / 100);
+    var brickColumnCount = Math.floor((screen.height * 0.6) / 100);
+
+    var brickWidth = 75;
+    var brickHeight = 20;
+    var brickPadding = 10;
+    var brickOffsetTop = 30;
+    var brickOffsetLeft = 30;
+
+    var gameOverNotify = document.querySelector('.game-over-notify');
+    var newLevel = document.querySelector('.new-level');
+    var interval;
+
+    var bricks = [];
+
+    for(var c=0; c<brickColumnCount; c++) {
+      bricks[c] = [];
+      for(var r=0; r<brickRowCount; r++) {
+        bricks[c][r] = { x: 0, y: 0, status: 1, strength: 1 };
+      }
+    }
+
+    // -------------------------------------------------- Events ----------------------------------------------------
+
+    document.addEventListener("keydown", keyDownHandler, false);
+
+    document.addEventListener("keyup", keyUpHandler, false);
+
+    gameOverNotify.addEventListener("click", function() {
+      document.location.reload();
+    });
+
+    // change paddle position with handler
+    function keyDownHandler(e) {
+
+      if(e.keyCode == 39) {
+        rightPressed = true;
+      }
+      else if(e.keyCode == 37) {
+        leftPressed = true;
+      }
+
+    }
+    function keyUpHandler(e) {
+
+      if(e.keyCode == 39) {
+        rightPressed = false;
+      }
+      else if(e.keyCode == 37) {
+        leftPressed = false;
+      }
+
+    }
+
+    // --------------------------------------------------------- Collision --------------------------------------------------
+
+    function collisionDetection() {
+      for(var c=0; c<brickColumnCount; c++) {
+        for(var r=0; r<brickRowCount; r++) {
+          let b = bricks[c][r];
+          if(b.status == 1) {
+
+            // rebound from corners
+            if((x >= b.x ) && (x <= b.x - ballRadius) && (y >= b.y ) && (y <= b.y - ballRadius)
+               ||
+               (x >= b.x + brickWidth) && (x <= b.x + brickWidth + ballRadius ) && (y >= b.y - ballRadius ) && ( y <= b.y )
+               ||
+               (x >= b.x - ballRadius) && (x <= b.x) && (y >= b.y + brickHeight)  && (y <= b.y + ballRadius)
+               ||
+               (x >= b.x + brickWidth) && (x <= b.x + brickWidth + ballRadius) && (y >= b.y + brickHeight) && (y <= b.y + brickHeight + ballRadius)) {
+              dy = -dy;
+              dx = -dx;
+
+              checkStrength(b);
+              continue;
+            }
+
+            // rebound from sides (left and right)
+            if (y > b.y - ballRadius && y < b.y + brickHeight + ballRadius && x >= b.x && x <= b.x + ballRadius ||
+                y > b.y - ballRadius && y < b.y + brickHeight + ballRadius && x >= b.x + brickWidth && x <= b.x + brickWidth + ballRadius) {
+              dx = -dx;
+
+              checkStrength(b);
+              continue;
+            }
+
+            // rebound from sides (top and bottom)
+            if (x > b.x - ballRadius && x < b.x + brickWidth + ballRadius && y == b.y - ballRadius ||
+                x > b.x - ballRadius && x < b.x + brickWidth + ballRadius && y == b.y + brickHeight + ballRadius) {
+              dy = -dy;
+
+              checkStrength(b);
+              continue;
+            }
+          }
+        }
+      }
+    }
+
+// ----------------------------------------- Infinite game -------------------------------------------------
+
+  function alertLevel() {
+
+    newLevel.style.display = 'flex';
+    newLevel.innerHTML = `Level ${round}!`
+    clearInterval(interval);
+
+    setTimeout(() => {
+      newLevel.style.display = 'none';
+      interval = setInterval(draw, 10);
+    }, 3000);
+
+    return;
+  }
+
+  function nextLevel() {
+
+    for(let c=0; c<brickColumnCount; c++) {
+      for(let r=0; r<brickRowCount; r++) {
+        if( bricks[c][r].status === 1 ) return;
+      }
+    }
+
+    round++;
+    if( round > 6 ) {
+      maxValue = 6;
+      minValue++;
+    } else maxValue = round;
+
+    alertLevel();
+
+    x = paddleX + (paddleWidth / 2);
+    y = canvas.height - 62;
+
+    for(let c=0; c<brickColumnCount; c++) {
+      for(let r=0; r<brickRowCount; r++) {
+        bricks[c][r].status = 1;
+        bricks[c][r].strength = getRandom(minValue, maxValue);
+      }
+    }
+
+  }
+    
+  function checkStrength(brick) {
+    brick.strength--;
+    if( brick.strength == 0 ) brick.status = 0;
+  }
+
+    // ------------------------------------------- Draw ---------------------------------------
+
+    function drawBall() {
+      ctx.beginPath();
+      ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+      ctx.fillStyle = "#0095DD";
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    function drawPaddle() {
+      ctx.beginPath();
+      ctx.rect(paddleX, paddleY, paddleWidth, paddleHeight);
+      ctx.fillStyle = "#0095DD";
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    function drawBricks() {
+      for(var c=0; c<brickColumnCount; c++) {
+        for(var r=0; r<brickRowCount; r++) {
+          if(bricks[c][r].status == 1) {
+
+            let curStrength = bricks[c][r].strength;
+            let brickX = (r * (brickWidth + brickPadding)) + brickOffsetLeft;
+            let brickY = (c * (brickHeight + brickPadding)) + brickOffsetTop;
+
+            bricks[c][r].x = brickX;
+            bricks[c][r].y = brickY;
+
+            ctx.beginPath();
+            ctx.rect(brickX, brickY, brickWidth, brickHeight);
+            ctx.fillStyle = `rgb(${curStrength * 40}, ${curStrength * 40}, ${curStrength * 40})`;
+            ctx.fill();
+            ctx.closePath();
+
+          }
+        }
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      nextLevel();
+      drawBricks();
+      drawBall();
+      drawPaddle();
+      collisionDetection();
+
+      if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+        dx = -dx;
+      }
+
+      if(y + dy < ballRadius) {
+        dy = -dy;
+      }
+
+      if(y + dy > canvas.height - ballRadius ) {
+        gameOverNotify.style.display = 'flex';
+        clearInterval(interval);
+        return;
+      }
+
+      movePaddle();
+      reboundPaddle();
+
+      x += dx;
+      y += dy;
+    }
+
+    // ------------------------------------ Paddle ---------------------------------------------------
+
+    function movePaddle() {
+      if(rightPressed && paddleX < canvas.width-paddleWidth) {
+        paddleX += 5;
+      }
+      else if(leftPressed && paddleX > 0) {
+        paddleX -= 5;
+      }
+    }
+
+    function reboundPaddle() {
+
+      if( y >= paddleY + ballRadius && x >= paddleX - ballRadius && x <= paddleX + paddleWidth + ballRadius) {dy = 1; y += dy; return}
+
+      if( y > paddleY - ballRadius && y <= paddleY + ballRadius && x >= paddleX - ballRadius && x <= paddleX + paddleWidth + ballRadius) {
+          dy = -2;
+          dx = 0;
+
+          y += dy;
+          return;
+      }
+      // rebound from the paddle corners
+
+      if( x == paddleX - ballRadius && y == paddleY - ballRadius && dx > 0 
+          ||
+          x == paddleX + paddleWidth + ballRadius && y >= paddleY && dx < 0) {
+        dy = -dy;
+        dx = -dx;
+      }
+
+      // change speed depending on where the ball hit
+      if(y >= paddleY - ballRadius && 
+         x >= paddleX - ballRadius && 
+         x <= paddleX + paddleWidth + ballRadius) {
+          let centerPaddle = ((paddleWidth / 2) + paddleX) / 2;
+          // reset dx
+          dx < 0 ? dx = -2 : dx = 2;
+
+          if(x < centerPaddle) {
+            dx = dx * ((centerPaddle - x) / 120 )
+          };
+
+          if(x > centerPaddle) {
+            dx = dx * ((x - centerPaddle) / 120 )
+          };
+
+          if(x == centerPaddle) {
+            dx = 0;
+          };
+
+          // min speed
+          if( dx > 0 && dx < 1 ) dx  = 1;
+          if( dx <= 0 && dx > -1) dx = -1;
+
+          // max speed
+          if( dx > 3.5 ) dx  = 3.5;
+          if( dx < -3.5 ) dx  = -3.5;
+          
+          dy = -dy;
+      } 
+      
+    }
+
+    function getRandom(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    document.addEventListener('mousemove', e => {
+      let center = e.pageX  - (paddleWidth * 2.5);
+      if( center < canvas.width-paddleWidth && center > 0) paddleX = center;
+    });
+
+    document.addEventListener('touchmove', e => {
+      let center = e.pageX  - (paddleWidth * 2.5);
+      if( center < canvas.width-paddleWidth && center > 0) paddleX = center;
+    });
+
+    interval = setInterval(draw, 10);
+    alertLevel();
+    
+    </script>
+  </body>
+</html>
