@@ -57,8 +57,8 @@
     <script>
 
     var canvas = document.getElementById("myCanvas");
-    canvas.width = screen.width - ( screen.width * 0.2 );
-    canvas.height = screen.height - ( screen.height * 0.3);
+    canvas.width = screen.width * 0.8;
+    canvas.height = screen.height * 0.7;
 
     var ctx = canvas.getContext("2d");
     var lives = 3;
@@ -79,14 +79,14 @@
     var rightPressed = false;
     var leftPressed = false;
 
-    var brickRowCount = Math.floor((screen.width * 0.9) / 100);
-    var brickColumnCount = Math.floor((screen.height * 0.6) / 100);
+    var brickRowCount = 10;
+    var brickColumnCount = 3;
 
-    var brickWidth = 75;
+    var brickPadding = Math.floor(screen.width / 100);
+    var brickOffsetTop = Math.floor((screen.width / 100) * 3);
+    var brickOffsetLeft = Math.floor((screen.width / 100) * 3);
+    var brickWidth = Math.floor((canvas.width - (brickPadding * 10) - brickOffsetLeft * 1.5) / brickRowCount);
     var brickHeight = 20;
-    var brickPadding = 10;
-    var brickOffsetTop = 30;
-    var brickOffsetLeft = 30;
 
     var gameOverNotify = document.querySelector('.game-over-notify');
     var newLevel = document.querySelector('.new-level');
@@ -150,28 +150,32 @@
                ||
                (x >= b.x + brickWidth) && (x <= b.x + brickWidth + ballRadius) && (y >= b.y + brickHeight) && (y <= b.y + brickHeight + ballRadius)) {
               dy = -dy;
+              y += dy;
               dx = -dx;
-
+              x += dx;  
+              
               checkStrength(b);
-              continue;
+              return;
             }
 
             // rebound from sides (left and right)
             if (y > b.y - ballRadius && y < b.y + brickHeight + ballRadius && x >= b.x && x <= b.x + ballRadius ||
                 y > b.y - ballRadius && y < b.y + brickHeight + ballRadius && x >= b.x + brickWidth && x <= b.x + brickWidth + ballRadius) {
               dx = -dx;
+              x += dx;
 
               checkStrength(b);
-              continue;
+              return;
             }
 
             // rebound from sides (top and bottom)
-            if (x > b.x - ballRadius && x < b.x + brickWidth + ballRadius && y == b.y - ballRadius ||
-                x > b.x - ballRadius && x < b.x + brickWidth + ballRadius && y == b.y + brickHeight + ballRadius) {
+            if (x > b.x - ballRadius && x < b.x + brickWidth + ballRadius && y > b.y - ballRadius && y < b.y ||
+                x > b.x - ballRadius && x < b.x + brickWidth + ballRadius && y > b.y + brickHeight && y < b.y + brickHeight + ballRadius) {
               dy = -dy;
+              y += dy;
 
               checkStrength(b);
-              continue;
+              return;
             }
           }
         }
@@ -203,11 +207,13 @@
     }
 
     round++;
+
     if( round > 6 ) {
       maxValue = 6;
       minValue++;
     } else maxValue = round;
 
+    checkWin();
     alertLevel();
 
     x = paddleX + (paddleWidth / 2);
@@ -221,6 +227,12 @@
     }
 
   }
+
+  function checkwin() {
+    if( round == 12 ) {
+
+    }
+  };
     
   function checkStrength(brick) {
     brick.strength--;
@@ -252,14 +264,25 @@
 
             let curStrength = bricks[c][r].strength;
             let brickX = (r * (brickWidth + brickPadding)) + brickOffsetLeft;
-            let brickY = (c * (brickHeight + brickPadding)) + brickOffsetTop;
+            let brickY = Math.floor(c * (brickHeight + brickPadding)) + brickOffsetTop;
 
             bricks[c][r].x = brickX;
             bricks[c][r].y = brickY;
 
+            console.log(brickX, brickY)
             ctx.beginPath();
             ctx.rect(brickX, brickY, brickWidth, brickHeight);
-            ctx.fillStyle = `rgb(${curStrength * 40}, ${curStrength * 40}, ${curStrength * 40})`;
+
+            // ----------------- add colors to bricks -------------------------------------------
+            ctx.fillStyle = `rgb(${curStrength * 60}, 0, 0)`;
+
+            if( curStrength > 4 ) {
+              ctx.fillStyle = `rgb(${curStrength * 30}, ${curStrength * 30}, 0)`;
+            }
+
+            if( curStrength > 8 ) {
+              ctx.fillStyle = `rgb(${curStrength * 20}, ${curStrength * 20}, ${curStrength * 20})`;
+            }
             ctx.fill();
             ctx.closePath();
 
@@ -296,6 +319,7 @@
 
       x += dx;
       y += dy;
+
     }
 
     // ------------------------------------ Paddle ---------------------------------------------------
