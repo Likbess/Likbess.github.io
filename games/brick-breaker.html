@@ -90,6 +90,7 @@
 
     var gameOverNotify = document.querySelector('.game-over-notify');
     var newLevel = document.querySelector('.new-level');
+    let leftOffset = (screen.width - canvas.width) / 2;
     var interval;
 
     var bricks = [];
@@ -150,8 +151,8 @@
                ||
                (x >= b.x + brickWidth) && (x <= b.x + brickWidth + ballRadius) && (y >= b.y + brickHeight) && (y <= b.y + brickHeight + ballRadius)) {
               dy = -dy;
-              y += dy;
               dx = -dx;
+              y += dy;
               x += dx;  
               
               checkStrength(b);
@@ -269,7 +270,6 @@
             bricks[c][r].x = brickX;
             bricks[c][r].y = brickY;
 
-            console.log(brickX, brickY)
             ctx.beginPath();
             ctx.rect(brickX, brickY, brickWidth, brickHeight);
 
@@ -386,22 +386,26 @@
       
     }
 
+    function checkWin() {
+
+    }
+
     function getRandom(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    document.addEventListener('mousemove', e => {
-      let center = e.pageX  - (paddleWidth * 2.5);
+    canvas.addEventListener('mousemove', e => {
+      center = e.clientX  - (paddleWidth * 0.5) - leftOffset;
       if( center < canvas.width-paddleWidth && center > 0) paddleX = center;
     });
 
-    document.addEventListener('touchmove', e => {
-      let center = e.pageX  - (paddleWidth * 2.5);
+    canvas.addEventListener('touchmove', e => {
+      center = Math.floor(e.changedTouches[0].pageX  - (paddleWidth * 0.5) - leftOffset);     
       if( center < canvas.width-paddleWidth && center > 0) paddleX = center;
+      e.preventDefault();
     });
 
     interval = setInterval(draw, 10);
-    alertLevel();
     
     </script>
   </body>
