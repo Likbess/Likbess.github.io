@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -80,6 +81,9 @@
     var paddleX = ( canvas.width - paddleWidth ) / 2;
     var paddleY = canvas.height - (paddleHeight * 5);
 
+    var rightPressed = false;
+    var leftPressed = false;
+
     var brickRowCount = 9;
     var brickColumnCount = 4;
 
@@ -99,6 +103,7 @@
 
     generateStartValues();
 
+    console.log(startCol, startRow)
     for(var c = startCol; c < brickColumnCount; c++) {
       bricks[c] = [];
       for(var r = startRow; r < brickRowCount - 1; r++) {
@@ -106,32 +111,44 @@
       }
     }
 
-    function updateLives() {
+    function generateStartValues() {
+      startCol = getRandom(0, 1);
+      startRow = getRandom(0, 1);
+    }
 
-      if(y + dy > canvas.height - ballRadius) {
-        lives--;
-        if( lives < 1 ) {
-          gameOverNotify.style.display = 'flex';
-          clearInterval(interval);
-          return;
-        }
+    // -------------------------------------------------- Events ----------------------------------------------------
+
+    document.addEventListener("keydown", keyDownHandler, false);
+
+    document.addEventListener("keyup", keyUpHandler, false);
+
+    gameOverNotify.addEventListener("click", function() {
+      document.location.reload();
+    });
+
+    // change paddle position with handler
+    function keyDownHandler(e) {
+
+      if(e.keyCode == 39) {
+        rightPressed = true;
+      }
+      else if(e.keyCode == 37) {
+        leftPressed = true;
+      }
+
+    }
+    function keyUpHandler(e) {
+
+      if(e.keyCode == 39) {
+        rightPressed = false;
+      }
+      else if(e.keyCode == 37) {
+        leftPressed = false;
       }
 
     }
 
     // --------------------------------------------------------- Collision --------------------------------------------------
-
-    function sidesCollision() {
-
-      if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
-        dx = -dx;
-      }
-
-      if(y + dy < ballRadius) {
-        dy = -dy;
-      }
-
-    }
 
     function collisionDetection() {
       for(var c = startCol; c < brickColumnCount; c++) {
@@ -147,7 +164,6 @@
                (x >= b.x - ballRadius) && (x <= b.x) && (y >= b.y + brickHeight)  && (y <= b.y + ballRadius)
                ||
                (x >= b.x + brickWidth) && (x <= b.x + brickWidth + ballRadius) && (y >= b.y + brickHeight) && (y <= b.y + brickHeight + ballRadius)) {
-                 
               dy = -dy;
               dx = -dx;
               y += dy;
@@ -181,71 +197,6 @@
       }
     }
 
-    function paddleCollision() {
-
-      // under of left and right sides
-      if( x <= paddleX + paddleWidth + ballRadius  && x >= paddleX - ballRadius && 
-          y >= paddleY + ballRadius) {
-        dy = 1; 
-        y += dy; 
-
-        return;
-      }
-
-      // left and right sides of paddle
-      if( y > paddleY - ballRadius && y <= paddleY + ballRadius && 
-          x >= paddleX - ballRadius && x <= paddleX + paddleWidth + ballRadius) {
-
-        dy = -2;
-        dx = 0;
-        y += dy;
-        
-        return;
-      }
-
-      // rebound from the paddle corners
-
-      if( x == paddleX - ballRadius && y == paddleY - ballRadius && dx > 0 ||
-          x == paddleX + paddleWidth + ballRadius && y >= paddleY && dx < 0) {
-
-        dy = -dy;
-        dx = -dx;
-      }
-
-      // change speed depending on where the ball hit
-
-      if(y >= paddleY - ballRadius && 
-         x >= paddleX - ballRadius && 
-         x <= paddleX + paddleWidth + ballRadius) {
-
-          let centerPaddle = (paddleWidth / 2) + paddleX;
-          // reset dx
-          dx < 0 ? dx = -2 : dx = 2;
-
-          if(x < centerPaddle) {
-            dx = dx * ((centerPaddle - x) / 120 )
-          };
-
-          if(x > centerPaddle) {
-            dx = dx * ((x - centerPaddle) / 120 )
-          };
-
-          if(x == centerPaddle) {
-            dx = 0;
-          };
-
-          // min speed
-          if( dx > 0 && dx < 1 ) dx  = 1;
-          if( dx <= 0 && dx > -1) dx = -1;
-
-          // max speed
-          if( dx > 3.5 ) dx = 3.5;
-          if( dx < -3.5 ) dx = -3.5;
-          
-          dy = -dy;
-      } 
-    }
-
 // ----------------------------------------- Infinite game -------------------------------------------------
 
   function alertLevel() {
@@ -271,13 +222,13 @@
     }
 
     round++;
-    lives++;
 
     if( round > 6 ) {
       maxValue = 6;
       minValue++;
     } else maxValue = round;
 
+    checkWin();
     alertLevel();
     generateStartValues();
 
@@ -355,93 +306,119 @@
       }
     }
 
-    function draw(e) {
+    function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       nextLevel();
-
       drawBricks();
       drawBall();
       drawPaddle();
-
       collisionDetection();
-      sidesCollision();
 
+      if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+        dx = -dx;
+      }
+
+      if(y + dy < ballRadius) {
+        dy = -dy;
+      }
+
+      if(y + dy > canvas.height - ballRadius ) {
+        gameOverNotify.style.display = 'flex';
+        clearInterval(interval);
+        return;
+      }
+
+      movePaddle();
       reboundPaddle();
-      movePaddle(e);
 
-      updateLives();
-      
       x += dx;
       y += dy;
 
     }
 
-    // some need functions
+    // ------------------------------------ Paddle ---------------------------------------------------
+
+    function movePaddle() {
+      if(rightPressed && paddleX < canvas.width-paddleWidth) {
+        paddleX += 5;
+      }
+      else if(leftPressed && paddleX > 0) {
+        paddleX -= 5;
+      }
+    }
+
+    function reboundPaddle() {
+
+      if( y >= paddleY + ballRadius && x >= paddleX - ballRadius && x <= paddleX + paddleWidth + ballRadius) {dy = 1; y += dy; return}
+
+      if( y > paddleY - ballRadius && y <= paddleY + ballRadius && x >= paddleX - ballRadius && x <= paddleX + paddleWidth + ballRadius) {
+          dy = -2;
+          dx = 0;
+
+          y += dy;
+          return;
+      }
+      // rebound from the paddle corners
+
+      if( x == paddleX - ballRadius && y == paddleY - ballRadius && dx > 0 
+          ||
+          x == paddleX + paddleWidth + ballRadius && y >= paddleY && dx < 0) {
+        dy = -dy;
+        dx = -dx;
+      }
+
+      // change speed depending on where the ball hit
+      if(y >= paddleY - ballRadius && 
+         x >= paddleX - ballRadius && 
+         x <= paddleX + paddleWidth + ballRadius) {
+          let centerPaddle = ((paddleWidth / 2) + paddleX) / 2;
+          // reset dx
+          dx < 0 ? dx = -2 : dx = 2;
+
+          if(x < centerPaddle) {
+            dx = dx * ((centerPaddle - x) / 120 )
+          };
+
+          if(x > centerPaddle) {
+            dx = dx * ((x - centerPaddle) / 120 )
+          };
+
+          if(x == centerPaddle) {
+            dx = 0;
+          };
+
+          // min speed
+          if( dx > 0 && dx < 1 ) dx  = 1;
+          if( dx <= 0 && dx > -1) dx = -1;
+
+          // max speed
+          if( dx > 3.5 ) dx  = 3.5;
+          if( dx < -3.5 ) dx  = -3.5;
+          
+          dy = -dy;
+      } 
+      
+    }
+
+    function checkWin() {
+
+    }
 
     function getRandom(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    function generateStartValues() {
-      startCol = getRandom(0, 1);
-      startRow = getRandom(0, 1);
-    }
-
-
-    
-    // -------------------------------------------------- Events ----------------------------------------------------
-
-    gameOverNotify.addEventListener("click", function() {
-      document.location.reload();
-    });
-
-    // mouse support
     canvas.addEventListener('mousemove', e => {
-      center = Math.floor(e.clientX  - (paddleWidth * 0.5) - leftOffset);
-
-      if( center < canvas.width - paddleWidth && center > 0) paddleX = center;
+      center = e.clientX  - (paddleWidth * 0.5) - leftOffset;
+      if( center < canvas.width-paddleWidth && center > 0) paddleX = center;
     });
 
-    // mobile support
     canvas.addEventListener('touchmove', e => {
       center = Math.floor(e.changedTouches[0].pageX  - (paddleWidth * 0.5) - leftOffset);     
-
       if( center < canvas.width-paddleWidth && center > 0) paddleX = center;
       e.preventDefault();
     });
-
-    // ------------------------------------- keyboard ------------------------------------------------
-
-    let rightPressed = false;
-    let leftPressed = false;
-
-    document.addEventListener('keydown', keyboardMove, false);
-    document.addEventListener('keyup', keyboardMove, false);
-
-    function keyboardMove(e) {
-       // right arrow
-       if( e.keyCode == 39 ) {
-        rightPressed = !rightPressed;
-      }
-
-      // left arrow
-      if( e.keyCode == 37 ) {
-        leftPressed = !leftPressed;
-      }
-    }
-
-    function movePaddle(e) {
-
-      if(paddleX < canvas.width - paddleWidth && rightPressed) {
-        paddleX += 5;
-      }
-
-      if(paddleX > 0 && leftPressed) {
-        paddleX -= 5;
-      }
-
-    }
 
     interval = setInterval(draw, 10);
     alertLevel();
