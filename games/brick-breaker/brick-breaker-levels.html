@@ -500,6 +500,14 @@
         opacity: 0;
       }
     }
+
+    @media(max-width: 399px) {
+      .game {
+        overflow-y: hidden;
+        height: 90%;
+        margin-top: 15%;
+      }
+    }
       
   </style>
 
@@ -773,7 +781,9 @@
 
     let brickColumnCount = 4;
     let brickRowCount = 10;
-    let bricks = [];                                  
+    let bricks = [];    
+
+    let paddleY = canvas.height * 0.85;                              
 
     
     // game class, all other classes handle by this class
@@ -862,7 +872,7 @@
         balls.slice(1, balls.length);
         balls[0].ballRadius = 10;
         balls[0].x = canvas.width / 2;
-        balls[0].y = (canvas.height * 0.9) - 12;
+        balls[0].y = (paddleY) - 12;
         balls[0].dx = 2;
         balls[0].dy = -2;
 
@@ -928,7 +938,7 @@
     class Ball {
       constructor() {
         let x = canvas.width / 2;
-        let y = (canvas.height * 0.9) - 12;
+        let y = (paddleY) - 12;
         let dx = 2;
         let dy = -2;
 
@@ -1159,7 +1169,6 @@
         this._paddleLeftOffset = 10;
         this._paddleHeight = 3;
         this._leftOffset = (screen.width - canvas.width) / 2;
-        this._paddleY = canvas.height * 0.9;
 
         this._Bricks = new Bricks();
         this._GameOver = new GameOver();
@@ -1170,14 +1179,14 @@
 
       _drawPaddle() {
         ctx.beginPath();
-        ctx.rect(this._paddleLeftOffset, this._paddleY, canvas.width - this._paddleLeftOffset * 2, this._paddleHeight);
+        ctx.rect(this._paddleLeftOffset, paddleY, canvas.width - this._paddleLeftOffset * 2, this._paddleHeight);
         ctx.fillStyle = "#999";
         ctx.fill();
         ctx.closePath();
       }
 
       _paddleCollision() {
-        if( balls[0].y >= this._paddleY - balls[0].ballRadius - 3 && balls[0].dy > 0) {
+        if( balls[0].y >= paddleY - balls[0].ballRadius - 3 && balls[0].dy > 0) {
 
           // function that create bombs from rest shoots 
           if( isWin ) {
@@ -1202,7 +1211,7 @@
         }
 
         for( let i = 1; i < balls.length; i++ ) {
-          if( balls[i].y >= this._paddleY - balls[i].ballRadius - 3) {
+          if( balls[i].y >= paddleY - balls[i].ballRadius - 3) {
             balls[i].status = 0;
           }
         }
