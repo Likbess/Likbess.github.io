@@ -835,7 +835,7 @@
 
         if( isNaN(this._miniDx) ) return;
         if( !isFinite(this._miniDx) ) return;
-        if( this._necessaryPosition.y > canvas.height * 0.85) return;
+        if( this._necessaryPosition.y > canvas.height * 0.8) return;
 
         // draw mini ball until sides collision
         while( this._miniX < canvas.width && this._miniX > 0 && this._miniY > 0 && this._miniY < canvas.height ) {
