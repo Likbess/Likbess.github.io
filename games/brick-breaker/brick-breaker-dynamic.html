@@ -360,14 +360,6 @@
         opacity: 0;
       }
     }
-
-    @media(max-width: 399px) {
-      .game {
-        overflow-y: hidden;
-        height: 90%;
-        margin-top: 15%;
-      }
-    }
       
   </style>
 
@@ -515,8 +507,6 @@
     let bricks = [];
 
     let paddleX = null; 
-    let paddleY = canvas.height * 0.85;
-
     let paddleWidth = 75;                                    
 
     class Game {
@@ -606,7 +596,7 @@
         balls = [];
 
         let ball = {
-          x: canvas.width / 2, y: (paddleY) - 12,
+          x: canvas.width / 2, y: (canvas.height * 0.9) - 12,
           dx: 2, dy: -2, ballRadius: 10, status: 1
         }
         balls.push(ball);
@@ -638,7 +628,7 @@
               }
             };
 
-            if( bricks[c][r].y >= paddleY && bricks[c][r].status == 1 ) {
+            if( bricks[c][r].y >= 532 && bricks[c][r].status == 1 ) {
               lifes = 0;
               this._Lifes._updateDOMLifes();
               this._Lifes._endGame();
@@ -676,7 +666,7 @@
         if( balls.length == 0 ) {
 
           let x = canvas.width / 2;
-          let y = (paddleY) - 12;
+          let y = (canvas.height * 0.9) - 12;
           let dx = 2;
           let dy = -2;
 
@@ -694,7 +684,7 @@
     class Ball {
       constructor() {
         let x = canvas.width / 2;
-        let y = (paddleY) - 12;
+        let y = (canvas.height * 0.9) - 12;
         let dx = 2;
         let dy = -2;
 
@@ -926,7 +916,7 @@
         this._leftOffset = (screen.width - canvas.width) / 2;
 
         paddleX = ( canvas.width - paddleWidth ) / 2;
-        paddleY = paddleY;
+        this._paddleY = canvas.height * 0.9;
 
         this._Bricks = new Bricks();
 
@@ -959,7 +949,7 @@
 
       _drawPaddle() {
         ctx.beginPath();
-        ctx.rect(paddleX, paddleY, paddleWidth, this._paddleHeight);
+        ctx.rect(paddleX, this._paddleY, paddleWidth, this._paddleHeight);
         ctx.fillStyle = "#999";
         ctx.fill();
         ctx.closePath();
@@ -971,7 +961,7 @@
 
           let ball = balls[i];
           // under paddle
-          if( ball.y > paddleY - ball.ballRadius + 3) {
+          if( ball.y > this._paddleY - ball.ballRadius + 3) {
             ball.dy = 2;
             ball.ballRadius *= 0.95;
 
@@ -982,10 +972,10 @@
 
               // left corner of paddle
           if( ball.x >= paddleX - ball.ballRadius && ball.x <= paddleX &&
-              ball.y == paddleY - ball.ballRadius && ball.dx > 0 ||
+              ball.y == this._paddleY - ball.ballRadius && ball.dx > 0 ||
               // right top corner of paddle 
               ball.x == paddleX + paddleWidth + ball.ballRadius &&
-              ball.y >= paddleY && ball.dx < 0) {
+              ball.y >= this._paddleY && ball.dx < 0) {
             
             this._Bricks._newColon();
 
@@ -997,8 +987,8 @@
 
           // change speed depending on where the ball hit
 
-          if( ball.y >= paddleY - ball.ballRadius && 
-              ball.y <= paddleY &&
+          if( ball.y >= this._paddleY - ball.ballRadius && 
+              ball.y <= this._paddleY &&
               ball.x >= paddleX - ball.ballRadius && 
               ball.x <= paddleX + paddleWidth + ball.ballRadius) {
 
@@ -1423,8 +1413,6 @@
             for( let c = 0; c < brickColumnCount; c++ ) {
               for( let r = 0; r < brickRowCount; r++ ) {
                 let brick = bricks[c][r];
-
-                console.log(brick)
                 brick.status == 1 ? this._checkStrength(brick) : null;
               }
             }
@@ -1775,7 +1763,7 @@
     let availableAbilities = [];
 
     // every 5 colon new ability
-    for( let i = 1; i * 5 <= brickColumnCount; i += 1 ) {
+    for( let i = 1; i * 1 <= brickColumnCount; i += 1 ) {
       availableAbilities.push(abilities[i - 1]);
     }
 
