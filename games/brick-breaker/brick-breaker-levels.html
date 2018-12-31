@@ -1477,7 +1477,7 @@
 
           case 'bomb': {
 
-            if( brick.strength > 1 ) break;
+            if( brick.strength > 1 ) return;
             // get surroundingBricks
             let surroundingBricks = [];
             // fill arr surrounding bricks
@@ -1502,7 +1502,7 @@
           }
 
           case 'newBall': {
-            if( brick.strength > 1 ) break;
+            if( brick.strength > 1 ) return;
 
             let ball = {
               x: brick.x + this._brickWidth, y: brick.y + this._brickHeight,
@@ -1522,7 +1522,7 @@
           }
 
           case 'black-hole': {
-            if( brick.strength > 1 ) break;
+            if( brick.strength > 1 ) return;
 
             let availableBricks = [];
 
@@ -1555,7 +1555,7 @@
           }
 
           case 'ball-reduce': {
-            if( brick.strength > 1 ) break;
+            if( brick.strength > 1 ) return;
 
             breakBall.ballRadius = breakBall.ballRadius * 0.6;
             setTimeout(() => breakBall.ballRadius = 10, 6000 * difficult);
@@ -1563,7 +1563,7 @@
           }
 
           case 'atomic-bomb': {
-            if( brick.strength > 1 ) break;
+            if( brick.strength > 1 ) return;
 
             overlay.style.display = 'flex';
             overlay.classList.toggle('fade-in-overlay');
