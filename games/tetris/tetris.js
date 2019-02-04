@@ -56,4 +56,4 @@ function update(time = 0) {
   requestAnimationFrame(update);
 }
 
-draw();
+update();
