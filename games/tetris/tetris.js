@@ -1,8 +1,6 @@
 const canvas = document.getElementById('tetris');
 const context = canvas.getContext('2d');
 
-context.fillStyle = '#000';
-context.fillRect(0, 0, canvas.width, canvas.height);
 context.scale(20, 20);
 
 const matrix = [
@@ -10,6 +8,12 @@ const matrix = [
   [1, 1, 1],
   [0, 1, 0],
 ];
+
+function draw() {
+  context.fillStyle = '#000';
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  drawMatricks(player.matrix, player.pos);
+}
 
 function drawMatricks(matrix, offset) {
   matrix.forEach((row, y) => {
@@ -33,4 +37,23 @@ const player = {
   matrix: matrix
 }
 
-drawMatricks(player.matrix, player.pos);
+let lastTime = 0;
+
+let dropCounter = 0;
+let dropInterval = 1000;
+
+function update(time = 0) {
+  const deltaTime = time - lastTime;
+  lastTime = time;
+
+  drowCounter += deltaTime;
+  if (dropCounter > dropInterval) {
+    player.pos.y++;
+    dropCounter = 0;
+  }
+
+  draw();
+  requestAnimationFrame(update);
+}
+
+draw();
