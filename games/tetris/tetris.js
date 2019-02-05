@@ -112,7 +112,6 @@ function playerDrop() {
     playerReset();
     areanSweap();
     updateScore();
-    return true;
   }
   dropCounter = 0;
 }
@@ -296,9 +295,25 @@ document.getElementById('down').addEventListener('click', () => {
 });
 
 document.getElementById('downDown').addEventListener('click', () => {
-  while (!playerDrop()) {
-    playerDrop();
+
+  out: while (true) {
+    player.pos.y++;
+    if (collide(arena, player)) {
+      break out;
+    }
+    dropCounter = 0;
   }
+
+  player.pos.y--;
+  merge(arena, player);
+  playerReset();
+  areanSweap();
+  updateScore();
+
+});
+
+document.getElementById('rotate').addEventListener('click', () => {
+  playerRotate(1);
 });
 
 

@@ -33,7 +33,7 @@
 
     .buttons {
       height: 15vh;
-      width: 320px;
+      width: 300px;
       display: flex;
       text-align: center;
       align-items: center;
@@ -42,12 +42,7 @@
 
     .button {
       cursor: pointer;
-    }
-
-    #down,
-    #downDown {
-      position: relative;
-      transform: rotate(90deg);
+      width: 36px;
     }
   </style>
 </head>
@@ -56,10 +51,11 @@
   <div class="score" id="score"></div>
   <canvas id="tetris" width="240" height="400"></canvas>
   <div class="buttons">
-    <span class="button" id="left">&#11164</span>
-    <span class="button" id="right">&#11166</span>
-    <span class="button" id="down">&#129050</span>
-    <span class="button" id="downDown">&#10144</span>
+    <img src="arrow-left.png" class="button" id="left">
+    <img src="arrow-right.png" class="button" id="right">
+    <img src="arrow-down.png" class="button" id="down">
+    <img src="arrow-downDown.png" class="button" id="downDown">
+    <img src="rotate-64.png" alt="rotate matrix" class="button" id="rotate">
   </div>
   <script src="tetris.js"></script>
 </body>
