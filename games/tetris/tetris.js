@@ -299,13 +299,13 @@ document.getElementById('downDown').addEventListener('click', () => {
   out: while (true) {
     player.pos.y++;
     if (collide(arena, player)) {
+      player.pos.y--;
+      merge(arena, player);
       break out;
     }
     dropCounter = 0;
   }
 
-  player.pos.y--;
-  merge(arena, player);
   playerReset();
   areanSweap();
   updateScore();
