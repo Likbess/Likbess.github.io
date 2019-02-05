@@ -317,6 +317,10 @@ document.getElementById('rotate').addEventListener('click', () => {
 });
 
 
+document.getElementById('rotate').addEventListener('touchstart', () => {
+  playerRotate(1);
+});
+
 
 playerReset();
 updateScore();
