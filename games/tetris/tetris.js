@@ -112,6 +112,7 @@ function playerDrop() {
     playerReset();
     areanSweap();
     updateScore();
+    return true;
   }
   dropCounter = 0;
 }
@@ -281,6 +282,26 @@ document.addEventListener('keydown', e => {
   }
 
 });
+
+document.getElementById('left').addEventListener('click', () => {
+  playerMove(-1);
+});
+
+document.getElementById('right').addEventListener('click', () => {
+  playerMove(1);
+});
+
+document.getElementById('down').addEventListener('click', () => {
+  playerDrop();
+});
+
+document.getElementById('downDown').addEventListener('click', () => {
+  while (!playerDrop()) {
+    playerDrop();
+  }
+});
+
+
 
 playerReset();
 updateScore();

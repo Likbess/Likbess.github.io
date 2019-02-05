@@ -27,8 +27,27 @@
     }
 
     canvas {
-      height: 90vh;
+      height: 75vh;
       border: solid .2em #fff;
+    }
+
+    .buttons {
+      height: 15vh;
+      width: 320px;
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .button {
+      cursor: pointer;
+    }
+
+    #down,
+    #downDown {
+      position: relative;
+      transform: rotate(90deg);
     }
   </style>
 </head>
@@ -36,6 +55,12 @@
 <body>
   <div class="score" id="score"></div>
   <canvas id="tetris" width="240" height="400"></canvas>
+  <div class="buttons">
+    <span class="button" id="left">⮜</span>
+    <span class="button" id="right">⮞</span>
+    <span class="button" id="down">➞</span>
+    <span class="button" id="downDown">➠</span>
+  </div>
   <script src="tetris.js"></script>
 </body>
 
