@@ -92,10 +92,10 @@ function draw() {
   drawMatricks(arena, {
     x: 0,
     y: 0,
-  })
-  drawMatricks(player.matrix, player.pos);
+  });
   [shadowMatrix.pos.x, shadowMatrix.pos.y] = [player.pos.x, player.pos.y]
   fallShadow();
+  drawMatricks(player.matrix, player.pos);
 };
 
 function merge(arena, player) {
