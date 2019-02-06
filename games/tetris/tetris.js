@@ -11,6 +11,14 @@ const player = {
   score: 0
 }
 
+const shadowMatrix = {
+  pos: {
+    x: 0,
+    y: 0
+  },
+  matrix: null
+}
+
 const arena = createMatrix(12, 20);
 const colors = [
   null,
@@ -20,7 +28,8 @@ const colors = [
   '#F538FF',
   '#FF8E0D',
   '#FFE138',
-  '#3877FF'
+  '#3877FF',
+  'grey'
 ]
 
 function areanSweap() {
@@ -85,6 +94,8 @@ function draw() {
     y: 0,
   })
   drawMatricks(player.matrix, player.pos);
+  [shadowMatrix.pos.x, shadowMatrix.pos.y] = [player.pos.x, player.pos.y]
+  fallShadow();
 };
 
 function merge(arena, player) {
@@ -121,6 +132,8 @@ function playerMove(dir) {
   if (collide(arena, player)) {
     player.pos.x -= dir;
   }
+
+  [shadowMatrix.pos.x, shadowMatrix.pos.y] = [player.pos.x, player.pos.y];
 }
 
 function playerReset() {
@@ -136,6 +149,9 @@ function playerReset() {
     player.score = 0;
     updateScore();
   }
+
+  shadowMatrix.matrix = player.matrix;
+  [shadowMatrix.pos.x, shadowMatrix.pos.y] = [player.pos.x, player.pos.y];
 
 }
 
@@ -162,6 +178,8 @@ function playerRotate(dir) {
     if (offset > player.matrix[0].length) {
       rotate(player.matrix, -dir);
       player.pos.x = pos;
+      shadowMatrix.matrix = player.matrix;
+      [shadowMatrix.pos.x, shadowMatrix.pos.y] = [player.pos.x, player.pos.y];
       return;
     }
   }
@@ -190,6 +208,36 @@ function rotate(matrix, dir) {
 function updateScore() {
   document.getElementById('score').innerText = player.score;
 }
+
+// shadow matrix
+
+function drawShadow(offset) {
+  shadowMatrix.matrix.forEach((row, y) => {
+    row.forEach((value, x) => {
+      if (value != 0) {
+        context.fillStyle = colors[8];
+        context.fillRect(
+          x + offset.x,
+          y + offset.y,
+          1, 1);
+      }
+    });
+  });
+}
+
+function fallShadow() {
+  out: while (true) {
+    shadowMatrix.pos.y++;
+    if (collide(arena, shadowMatrix)) {
+      shadowMatrix.pos.y--;
+      break out;
+    }
+  }
+
+  drawShadow(shadowMatrix.pos);
+}
+
+// drawShadow(shadowMatrix.pos);
 
 // pieces
 
